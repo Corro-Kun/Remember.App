@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:remember_app/page/home.dart';
+import 'package:remember_app/constans.dart';
+import 'package:remember_app/screens/home.dart';
+
+// https://colorhunt.co/palette/164863427d9d9bbec8ddf2fd
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff427D9D),
-      systemNavigationBarColor: Color(0xff164863),
+      statusBarColor: AppColors.secondaryColor,
+      systemNavigationBarColor: AppColors.primaryColor,
     ),
   );
   runApp(const MainApp());

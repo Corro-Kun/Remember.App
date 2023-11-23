@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:remember_app/constans.dart';
+import 'package:remember_app/screens/card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff427D9D),
+        backgroundColor: AppColors.secondaryColor,
         appBar: _appBar(),
         body: ListView(
           children: [
@@ -20,10 +22,69 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 30,
             ),
-            _categories_selection()
+            _categories_selection(),
+            const SizedBox(
+              height: 30,
+            ),
+            _tab_content()
           ],
         ),
         bottomNavigationBar: _navigationBarBottom());
+  }
+
+  Container _tab_content() {
+    return Container(
+      margin: const EdgeInsets.only(right: 10, left: 10),
+      child: Wrap(
+        children: [
+          GestureDetector(
+            // go to the card page
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const CardPage())),
+            child: Container(
+              margin: const EdgeInsets.only(right: 10, left: 10, bottom: 20),
+              height: 220,
+              width: 175,
+              decoration: const BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+              ),
+              child: Column(
+                children: [
+                  // is the image
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    height: 165,
+                    width: 175,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                        image: AssetImage("lib/assets/Waifu.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  // is the title
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    child: const Text(
+                      "Waifu",
+                      style: TextStyle(
+                        color: AppColors.primaryTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Container _categories_selection() {
@@ -40,7 +101,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text(
                 "Anime",
                 style: TextStyle(
-                  color: Color(0xff164863),
+                  color: AppColors.primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -53,7 +114,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text(
                 "Manga",
                 style: TextStyle(
-                  color: Color(0xff9BBEC8),
+                  color: AppColors.secondaryTextColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -66,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text(
                 "Videojuegos",
                 style: TextStyle(
-                  color: Color(0xff9BBEC8),
+                  color: AppColors.secondaryTextColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -79,7 +140,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text(
                 "Series",
                 style: TextStyle(
-                  color: Color(0xff9BBEC8),
+                  color: AppColors.secondaryTextColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -107,11 +168,11 @@ class _HomePageState extends State<HomePage> {
         decoration: InputDecoration(
           hintText: "Buscar",
           hintStyle: TextStyle(
-            color: Color(0xff9BBEC8),
+            color: AppColors.secondaryTextColor,
             fontSize: 18,
           ),
           filled: true,
-          fillColor: Color(0xff164863),
+          fillColor: AppColors.primaryColor,
           contentPadding: EdgeInsets.all(15),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -120,7 +181,7 @@ class _HomePageState extends State<HomePage> {
           prefixIcon: Icon(
             Icons.search,
             size: 27,
-            color: Color(0xff9BBEC8),
+            color: AppColors.secondaryTextColor,
           ),
         ),
       ),
@@ -132,19 +193,19 @@ class _HomePageState extends State<HomePage> {
       title: const Text(
         "Tus Recordatorios",
         style: TextStyle(
-          color: Color(0xffDDF2FD),
+          color: AppColors.primaryTextColor,
           fontSize: 24,
         ),
       ),
-      backgroundColor: const Color(0xff427D9D),
+      backgroundColor: AppColors.secondaryColor,
       elevation: 0.0,
     );
   }
 
   CurvedNavigationBar _navigationBarBottom() {
     return CurvedNavigationBar(
-      backgroundColor: const Color(0xff427D9D),
-      color: const Color(0xff164863),
+      backgroundColor: AppColors.secondaryColor,
+      color: AppColors.primaryColor,
       animationDuration: const Duration(milliseconds: 300),
       onTap: (index) {
         print(index);
@@ -153,17 +214,17 @@ class _HomePageState extends State<HomePage> {
         Icon(
           Icons.home,
           size: 30,
-          color: Color(0xffDDF2FD),
+          color: AppColors.primaryTextColor,
         ),
         Icon(
           Icons.favorite,
           size: 30,
-          color: Color(0xffDDF2FD),
+          color: AppColors.primaryTextColor,
         ),
         Icon(
           Icons.add_box_rounded,
           size: 30,
-          color: Color(0xffDDF2FD),
+          color: AppColors.primaryTextColor,
         ),
       ],
     );
