@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/screens/add.dart';
 import 'package:remember_app/screens/home.dart';
+import 'package:remember_app/widgets/navigationWidget.dart';
 
 // https://colorhunt.co/palette/164863427d9d9bbec8ddf2fd
 
@@ -12,17 +14,31 @@ void main() {
       systemNavigationBarColor: AppColors.primaryColor,
     ),
   );
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final PageController _pageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: Scaffold(
+        backgroundColor: AppColors.secondaryColor,
+        body: PageView(
+          controller: _pageController,
+          children: const <Widget>[
+            HomePage(),
+            Column(),
+            add(),
+          ],
+        ),
+        bottomNavigationBar:
+            navigationBarBottom(pageController: _pageController),
+      ),
     );
   }
 }

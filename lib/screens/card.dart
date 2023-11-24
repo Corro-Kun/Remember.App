@@ -13,8 +13,49 @@ class CardPage extends StatelessWidget {
       body: ListView(
         children: [
           _Image(context),
+          _Description(),
         ],
       ),
+    );
+  }
+
+  Column _Description() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(left: 20, top: 20),
+          child: const Text(
+            "Descripción",
+            style: TextStyle(
+              color: AppColors.primaryTextColor,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 20, top: 10),
+          child: const Text(
+            "Lorem ipsum dolor sit amet, consec tetur adipisc ing elit. Donec vitae arcu. Duis non leo volutpat, faucibus arcu eget, consequat libero. Donec vitae arcu. Duis non leo volutpat, faucibus arcu eget, consequat libero.",
+            style: TextStyle(
+              color: AppColors.secondaryTextColor,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 20),
+          alignment: Alignment.center,
+          child: TextButton(
+            onPressed: () => print("Ver más"),
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.primaryTextColor,
+              backgroundColor: AppColors.primaryColor,
+            ),
+            child: const Text("Ver más", style: TextStyle(fontSize: 15)),
+          ),
+        )
+      ],
     );
   }
 
@@ -88,10 +129,11 @@ class CardPage extends StatelessWidget {
           ),
           Container(
             height: 100,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
+              color: AppColors.primaryColor.withOpacity(0.4),
             ),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
