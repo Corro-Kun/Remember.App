@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
-import 'package:remember_app/screens/file.dart';
+import 'package:remember_app/widgets/file.dart';
 import 'package:remember_app/widgets/appBar.dart';
 import 'package:remember_app/widgets/navigationWidget.dart';
 
