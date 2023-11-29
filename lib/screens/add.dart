@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/screens/file.dart';
 import 'package:remember_app/widgets/appBar.dart';
 import 'package:remember_app/widgets/navigationWidget.dart';
 
@@ -19,15 +20,15 @@ class _addState extends State<add> {
       body: ListView(
         children: [
           Container(
-            height: 230,
+            height: 275,
             margin: const EdgeInsets.only(right: 20, left: 20, top: 20),
             decoration: BoxDecoration(
-              color: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Column(
+            child: Column(
               children: [
-                Row(
+                const Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
@@ -49,6 +50,14 @@ class _addState extends State<add> {
                       size: 25,
                     ),
                   ],
+                ),
+                Container(
+                  height: 250,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.only(top: 10),
+                    children: [File(), File()],
+                  ),
                 ),
               ],
             ),
