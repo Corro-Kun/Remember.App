@@ -17,7 +17,30 @@ class _addState extends State<add> {
       appBar: const TitleappBar(title: "Agregar Recordatorio"),
       backgroundColor: AppColors.secondaryColor,
       body: ListView(
-        children: const [editor(), editor()],
+        children: [
+          const editor(),
+          const editor(),
+          Container(
+            height: 50,
+            width: 50,
+            margin: const EdgeInsets.only(top: 5, left: 155, right: 155),
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: GestureDetector(
+              onTap: () => print("Añadir"),
+              child: const Text(
+                "Añadir",
+                style: TextStyle(
+                  color: AppColors.primaryTextColor,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
