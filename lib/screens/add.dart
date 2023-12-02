@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/screens/addSection.dart';
 import 'package:remember_app/widgets/editor.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
@@ -30,7 +31,8 @@ class _addState extends State<add> {
             ),
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => print("Añadir"),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const AddSection())),
               child: const Text(
                 "Añadir",
                 style: TextStyle(
