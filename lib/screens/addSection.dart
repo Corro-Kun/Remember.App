@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
 class AddSection extends StatelessWidget {
@@ -40,6 +41,9 @@ class AddSection extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(50),
               child: GestureDetector(
+                onTap: () {
+                  dataSession().getData().then((value) => print(value));
+                },
                 child: Container(
                   padding: const EdgeInsets.only(
                     top: 15,
