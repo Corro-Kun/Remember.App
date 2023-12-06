@@ -1,12 +1,12 @@
 import 'package:sqflite/sqflite.dart';
 
-class dataSession {
+class dataCard {
   Future<Database> OpenDB() async {
     final Future<Database> database = openDatabase(
       "C0rr0K4n.db",
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE session(idsession INTEGER PRIMARY KEY AUTO_INCREMENT, title TEXT)",
+          "CREATE TABLE card(idcard INTEGER PRIMARY KEY AUTO_INCREMENT, name TEXT, description TEXT, link TEXT, session_idsession INTEGER)",
         );
       },
       version: 1,
@@ -14,6 +14,4 @@ class dataSession {
 
     return database;
   }
-
-  Future<void> insertSession(String title) async {}
 }

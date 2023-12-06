@@ -3,8 +3,27 @@ import 'package:remember_app/constans.dart';
 import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
-class AddSection extends StatelessWidget {
+class AddSection extends StatefulWidget {
   const AddSection({super.key});
+
+  @override
+  State<AddSection> createState() => _AddSectionState();
+}
+
+class _AddSectionState extends State<AddSection> {
+  String title = '';
+
+  void _getTitle(String text) {
+    setState(() {
+      title = text;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getTitle(title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +35,8 @@ class AddSection extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-              child: const TextField(
-                decoration: InputDecoration(
+              child: TextField(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: AppColors.primaryColor,
@@ -36,13 +55,19 @@ class AddSection extends StatelessWidget {
                     ),
                   ),
                 ),
+                onChanged: (value) {
+                  _getTitle(value);
+                },
               ),
             ),
             Container(
               margin: const EdgeInsets.all(50),
               child: GestureDetector(
                 onTap: () {
-                  dataSession().getData().then((value) => print(value));
+                  dataSession()
+                      .insertSession(title)
+                      .then((value) => print("Se ha añadido la sección"));
+                  Navigator.pop(context);
                 },
                 child: Container(
                   padding: const EdgeInsets.only(
