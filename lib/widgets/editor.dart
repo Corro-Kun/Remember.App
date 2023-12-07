@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/screens/form.dart';
 import 'package:remember_app/widgets/file.dart';
 
 class editor extends StatelessWidget {
-  const editor({super.key});
+  String title = "Default";
+  int id = 0;
+  refresh() {
+    dataSession().getSessions();
+  }
+
+  editor(
+      {super.key,
+      required this.title,
+      required this.id,
+      required void refresh});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +35,19 @@ class editor extends StatelessWidget {
               children: [
                 // añadir un gestorClic para que al darle click se abra la pantalla de añadir
                 GestureDetector(
-                  onTap: () => print("Borrar"),
+                  onTap: () => {
+                    dataSession().deleteSession(id),
+                    refresh(),
+                  },
                   child: const Icon(
                     Icons.delete,
                     color: AppColors.primaryTextColor,
                     size: 25,
                   ),
                 ),
-                const Text(
-                  "Anime",
-                  style: TextStyle(
+                Text(
+                  title,
+                  style: const TextStyle(
                     color: AppColors.primaryTextColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

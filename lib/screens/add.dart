@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataSession.dart';
+import 'package:remember_app/models/sessionModel.dart';
 import 'package:remember_app/screens/addSection.dart';
 import 'package:remember_app/widgets/editor.dart';
 import 'package:remember_app/widgets/appBar.dart';
@@ -12,19 +14,44 @@ class add extends StatefulWidget {
 }
 
 class _addState extends State<add> {
+  List<sessionModel> session = [];
+
+  _getSessions() async {
+    session = await dataSession().getSessions();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getSessions();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // saco el tamaño de la pantalla
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: const TitleappBar(title: "Agregar Recordatorio"),
       backgroundColor: AppColors.secondaryColor,
       body: ListView(
         children: [
-          const editor(),
-          const editor(),
+          Container(
+              height: screenSize.height - 270,
+              child: ListView.builder(
+                itemCount: session.length,
+                itemBuilder: (context, index) {
+                  return editor(
+                    title: session[index].title,
+                    id: session[index].idsession,
+                    refresh: _getSessions(),
+                  );
+                },
+              )),
           Container(
             height: 50,
             width: 50,
-            margin: const EdgeInsets.only(top: 5, left: 155, right: 155),
+            margin: const EdgeInsets.only(top: 20, left: 155, right: 155),
             decoration: BoxDecoration(
               color: AppColors.primaryColor,
               borderRadius: BorderRadius.circular(10),
@@ -37,7 +64,7 @@ class _addState extends State<add> {
                 "Añadir",
                 style: TextStyle(
                   color: AppColors.primaryTextColor,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
             ),
