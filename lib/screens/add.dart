@@ -17,7 +17,12 @@ class _addState extends State<add> {
   List<sessionModel> session = [];
 
   _getSessions() async {
-    session = await dataSession().getSessions();
+    List<sessionModel> sessions = await dataSession().getSessions();
+    if (mounted) {
+      setState(() {
+        session = sessions;
+      });
+    }
   }
 
   @override
