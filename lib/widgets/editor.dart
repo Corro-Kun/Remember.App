@@ -56,7 +56,7 @@ class editor extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const form()),
+                      MaterialPageRoute(builder: (context) => form()),
                     );
                   },
                   child: const Icon(

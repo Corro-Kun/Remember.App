@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:remember_app/constans.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
 class form extends StatelessWidget {
-  const form({super.key});
+  form({super.key});
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      print(pickedFile.path);
+    } else {
+      print('No image selected.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +150,12 @@ class form extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => _pickImage(),
+            child: Text(
+              "Imagen",
             ),
           ),
         ],
