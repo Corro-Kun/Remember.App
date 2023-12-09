@@ -67,7 +67,7 @@ class _AddSectionState extends State<AddSection> {
                   dataSession()
                       .insertSession(title)
                       .then((value) => print("Se ha añadido la sección"));
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
                 child: Container(
                   padding: const EdgeInsets.only(

@@ -7,15 +7,14 @@ import 'package:remember_app/widgets/file.dart';
 class editor extends StatelessWidget {
   String title = "Default";
   int id = 0;
-  refresh() {
-    dataSession().getSessions();
-  }
+  final Function onRefresh;
 
-  editor(
-      {super.key,
-      required this.title,
-      required this.id,
-      required void refresh});
+  editor({
+    super.key,
+    required this.title,
+    required this.id,
+    required this.onRefresh,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class editor extends StatelessWidget {
                 GestureDetector(
                   onTap: () => {
                     dataSession().deleteSession(id),
-                    refresh(),
+                    onRefresh(),
                   },
                   child: const Icon(
                     Icons.delete,
@@ -54,8 +53,12 @@ class editor extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const form())),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const form()),
+                    );
+                  },
                   child: const Icon(
                     Icons.add,
                     color: AppColors.primaryTextColor,

@@ -15,13 +15,17 @@ class add extends StatefulWidget {
 
 class _addState extends State<add> {
   List<sessionModel> session = [];
+  bool State = true;
 
   _getSessions() async {
     List<sessionModel> sessions = await dataSession().getSessions();
     if (mounted) {
-      setState(() {
-        session = sessions;
-      });
+      if (State) {
+        setState(() {
+          session = sessions;
+        });
+        State = false;
+      }
     }
   }
 
@@ -49,7 +53,14 @@ class _addState extends State<add> {
                   return editor(
                     title: session[index].title,
                     id: session[index].idsession,
-                    refresh: _getSessions(),
+                    onRefresh: () async {
+                      List<sessionModel> sessions =
+                          await dataSession().getSessions();
+                      setState(() {
+                        session = sessions;
+                      });
+                      print("hola");
+                    },
                   );
                 },
               )),
@@ -63,8 +74,19 @@ class _addState extends State<add> {
             ),
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const AddSection())),
+              onTap: () async {
+                final Refresh = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddSection()),
+                );
+                if (Refresh != null) {
+                  List<sessionModel> sessions =
+                      await dataSession().getSessions();
+                  setState(() {
+                    session = sessions;
+                  });
+                }
+              },
               child: const Text(
                 "Añadir",
                 style: TextStyle(
