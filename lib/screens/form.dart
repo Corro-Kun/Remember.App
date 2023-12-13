@@ -1,20 +1,91 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
-class form extends StatelessWidget {
-  form({super.key});
+class form extends StatefulWidget {
+  int id = 0;
+  form({super.key, required this.id});
+
+  @override
+  State<form> createState() => _formState(id: id);
+}
+
+class _formState extends State<form> {
+  int id = 0;
+  _formState({required this.id});
 
   final ImagePicker _picker = ImagePicker();
+
+  cardModel card = cardModel(
+      idcard: 0,
+      name: "",
+      description: "",
+      link: "",
+      imagePath: "",
+      session_idsession: 0);
+
+  DecorationImage image = const DecorationImage(
+    image: AssetImage("lib/assets/Waifu.jpg"),
+    fit: BoxFit.cover,
+  );
 
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       print(pickedFile.path);
+      setState(() {
+        card.imagePath = pickedFile.path;
+      });
+      _getDecorationImagen(pickedFile.path);
     } else {
       print('No image selected.');
     }
+  }
+
+  _getCard(int id) async {
+    cardModel cards = cardModel(
+        idcard: 0,
+        name: "",
+        description: "",
+        link: "",
+        imagePath: "lib/assets/Waifu.jpg",
+        session_idsession: id);
+    setState(() {
+      card = cards;
+    });
+  }
+
+  DecorationImage _builderDecorationImage(String path) {
+    if (path.startsWith("lib")) {
+      return const DecorationImage(
+        image: AssetImage("lib/assets/Waifu.jpg"),
+        fit: BoxFit.cover,
+      );
+    } else {
+      return DecorationImage(
+        image: FileImage(File(path)),
+        fit: BoxFit.cover,
+      );
+    }
+  }
+
+  _getDecorationImagen(String path) {
+    setState(() {
+      image = _builderDecorationImage(path);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (id != 0) {
+      _getCard(id);
+    }
+    _getDecorationImagen(card.imagePath);
   }
 
   @override
@@ -28,21 +99,21 @@ class form extends StatelessWidget {
             height: 80,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Nombre",
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.primaryTextColor,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Lawrence...',
                     hintStyle: TextStyle(
                       fontSize: 18,
@@ -62,6 +133,12 @@ class form extends StatelessWidget {
                       ),
                     ),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      card.name = value;
+                    });
+                    print(card.name);
+                  },
                 ),
               ],
             ),
@@ -70,22 +147,22 @@ class form extends StatelessWidget {
             height: 120,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Descripción",
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.primaryTextColor,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 TextField(
                   maxLines: 5,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText:
                         'there respect citizen tears leader stems however gave now idea even natural organized...',
                     hintStyle: TextStyle(
@@ -106,6 +183,12 @@ class form extends StatelessWidget {
                       ),
                     ),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      card.description = value;
+                    });
+                    print(card.description);
+                  },
                 ),
               ],
             ),
@@ -114,21 +197,21 @@ class form extends StatelessWidget {
             height: 80,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "link",
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.primaryTextColor,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'http://jetak.ai/iggew...',
                     hintStyle: TextStyle(
                       fontSize: 18,
@@ -148,14 +231,41 @@ class form extends StatelessWidget {
                       ),
                     ),
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      card.link = value;
+                    });
+                    print(card.link);
+                  },
                 ),
               ],
             ),
           ),
-          ElevatedButton(
-            onPressed: () => _pickImage(),
-            child: Text(
-              "Imagen",
+          GestureDetector(
+            onTap: () => _pickImage(),
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              height: 220,
+              width: 200,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: AppColors.primaryColor,
+                  image: image),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: ElevatedButton(
+              onPressed: () => print(card),
+              style: ElevatedButton.styleFrom(
+                primary: AppColors.primaryColor,
+              ),
+              child: const Text(
+                "Guardar",
+                style: TextStyle(
+                  color: AppColors.primaryTextColor,
+                ),
+              ),
             ),
           ),
         ],
