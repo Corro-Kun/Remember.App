@@ -1,8 +1,53 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
 
-class File extends StatelessWidget {
-  const File({Key? key}) : super(key: key);
+class file extends StatefulWidget {
+  String title = "Default";
+  String path = "lib/assets/Waifu.jpg";
+
+  file({
+    super.key,
+    required this.title,
+    required this.path,
+  });
+
+  @override
+  State<file> createState() => _fileState();
+}
+
+class _fileState extends State<file> {
+  DecorationImage image = const DecorationImage(
+    image: AssetImage("lib/assets/Waifu.jpg"),
+    fit: BoxFit.cover,
+  );
+
+  DecorationImage _builderDecorationImage(String path) {
+    if (path.startsWith("lib")) {
+      return const DecorationImage(
+        image: AssetImage("lib/assets/Waifu.jpg"),
+        fit: BoxFit.cover,
+      );
+    } else {
+      return DecorationImage(
+        image: FileImage(File(path)),
+        fit: BoxFit.cover,
+      );
+    }
+  }
+
+  _getImage() {
+    setState(() {
+      image = _builderDecorationImage(widget.path);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +70,15 @@ class File extends StatelessWidget {
             width: 175,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              image: const DecorationImage(
-                image: AssetImage("lib/assets/Waifu.jpg"),
-                fit: BoxFit.cover,
-              ),
+              image: image,
             ),
           ),
           // is the title
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
-            child: const Text(
-              "Waifu",
-              style: TextStyle(
+            child: Text(
+              widget.title,
+              style: const TextStyle(
                 color: AppColors.primaryTextColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 17,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataSession.dart';
+import 'package:remember_app/models/sessionModel.dart';
 import 'package:remember_app/screens/card.dart';
 import 'package:remember_app/widgets/file.dart';
 import 'package:remember_app/widgets/appBar.dart';
@@ -12,11 +14,47 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<sessionModel> sessions = [];
+  int mainCategory = 1;
+
+  _getSessions() {
+    dataSession().getSessions().then((value) {
+      setState(() {
+        sessions = value;
+      });
+    });
+  }
+
+  _getMainCategory() {
+    setState(() {
+      dataSession().getSessions().then((value) {
+        setState(() {
+          mainCategory = value[0].idsession;
+        });
+      });
+    });
+  }
+
+  Color getColor(int id) {
+    if (id == mainCategory) {
+      return AppColors.primaryColor;
+    } else {
+      return AppColors.secondaryTextColor;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getSessions();
+    _getMainCategory();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
-      appBar: TitleappBar(title: "Tus Recordatorios"),
+      appBar: const TitleappBar(title: "Tus Recordatorios"),
       body: ListView(
         children: [
           _search(),
@@ -42,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             // go to the card page
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const CardPage())),
-            child: File(),
+            child: file(title: "Waifu", path: "lib/assets/Waifu.jpg"),
           )
         ],
       ),
@@ -53,63 +91,25 @@ class _HomePageState extends State<HomePage> {
     return Container(
       margin: const EdgeInsets.only(left: 20),
       height: 30,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-          GestureDetector(
-            onTap: () => print("Anime"),
+        itemCount: sessions.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () => print(mainCategory),
             child: Container(
               margin: const EdgeInsets.only(right: 20),
-              child: const Text(
-                "Anime",
+              child: Text(
+                sessions[index].title,
                 style: TextStyle(
-                  color: AppColors.primaryColor,
+                  color: getColor(sessions[index].idsession),
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
             ),
-          ),
-          GestureDetector(
-            child: Container(
-              margin: const EdgeInsets.only(right: 20),
-              child: const Text(
-                "Manga",
-                style: TextStyle(
-                  color: AppColors.secondaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            child: Container(
-              margin: const EdgeInsets.only(right: 20),
-              child: const Text(
-                "Videojuegos",
-                style: TextStyle(
-                  color: AppColors.secondaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            child: Container(
-              margin: const EdgeInsets.only(right: 20),
-              child: const Text(
-                "Series",
-                style: TextStyle(
-                  color: AppColors.secondaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }

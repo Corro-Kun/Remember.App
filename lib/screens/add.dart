@@ -59,7 +59,6 @@ class _addState extends State<add> {
                       setState(() {
                         session = sessions;
                       });
-                      print("hola");
                     },
                   );
                 },

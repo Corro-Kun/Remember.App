@@ -6,8 +6,11 @@ class dataSession {
     final Future<Database> database = openDatabase(
       "C0rr0K4n.db",
       onCreate: (db, version) {
-        return db.execute(
+        db.execute(
           "CREATE TABLE session(idsession INTEGER PRIMARY KEY, title TEXT)",
+        );
+        db.execute(
+          "CREATE TABLE card(idcard INTEGER PRIMARY KEY, name TEXT, description TEXT, link TEXT, imagePath TEXT,session_idsession INTEGER, FOREIGN KEY(session_idsession) REFERENCES session(idsession))",
         );
       },
       version: 1,
@@ -48,6 +51,12 @@ class dataSession {
     final Database db = await OpenDB();
 
     print("se elimino la session $idsession");
+
+    await db.delete(
+      'card',
+      where: 'session_idsession = ?',
+      whereArgs: [idsession],
+    );
 
     await db.delete(
       'session',

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
@@ -256,7 +257,10 @@ class _formState extends State<form> {
           Padding(
             padding: const EdgeInsets.only(top: 5),
             child: ElevatedButton(
-              onPressed: () => print(card),
+              onPressed: () {
+                dataCard().insertCard(card).then((value) => print("insertado"));
+                Navigator.pop(context, true);
+              },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.primaryColor,
               ),
