@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/db/dataSession.dart';
+import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/models/sessionModel.dart';
 import 'package:remember_app/screens/card.dart';
 import 'package:remember_app/widgets/file.dart';
@@ -16,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<sessionModel> sessions = [];
   int mainCategory = 1;
+  List<cardModel> cards = [];
 
   _getSessions() {
     dataSession().getSessions().then((value) {
@@ -43,11 +46,20 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  _getCards() {
+    dataCard().getCards(mainCategory).then((value) {
+      setState(() {
+        cards = value;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getSessions();
     _getMainCategory();
+    _getCards();
   }
 
   @override
@@ -72,17 +84,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   Container _tab_content() {
+    //Size screenSize = MediaQuery.of(context).size;
+
     return Container(
       margin: const EdgeInsets.only(right: 10, left: 10),
+      //height: screenSize.height - 335,
+      //color: Colors.amber,
       child: Wrap(
-        children: [
-          GestureDetector(
-            // go to the card page
-            onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const CardPage())),
-            child: file(title: "Waifu", path: "lib/assets/Waifu.jpg"),
-          )
-        ],
+        children: List.generate(
+          cards.length,
+          (index) => GestureDetector(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CardPage(
+                          card: cards[index],
+                          session: sessions
+                              .where((element) =>
+                                  element.idsession == mainCategory)
+                              .first,
+                        ))),
+            child: file(title: cards[index].name, path: cards[index].imagePath),
+          ),
+        ),
       ),
     );
   }
@@ -96,7 +120,14 @@ class _HomePageState extends State<HomePage> {
         itemCount: sessions.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => print(mainCategory),
+            onTap: () => setState(() {
+              mainCategory = sessions[index].idsession;
+              dataCard().getCards(mainCategory).then((value) => {
+                    setState(() {
+                      cards = value;
+                    })
+                  });
+            }),
             child: Container(
               margin: const EdgeInsets.only(right: 20),
               child: Text(

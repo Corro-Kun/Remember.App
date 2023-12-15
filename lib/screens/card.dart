@@ -1,10 +1,30 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/models/cardModel.dart';
+import 'package:remember_app/models/sessionModel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CardPage extends StatelessWidget {
-  const CardPage({super.key});
+  cardModel card;
+  sessionModel session;
+  CardPage({super.key, required this.card, required this.session});
+
+  DecorationImage _builderDecorationImage(String path) {
+    if (path.startsWith("lib")) {
+      return const DecorationImage(
+        image: AssetImage("lib/assets/Waifu.jpg"),
+        fit: BoxFit.cover,
+      );
+    } else {
+      return DecorationImage(
+        image: FileImage(File(path)),
+        fit: BoxFit.cover,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +55,9 @@ class CardPage extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.only(left: 20, top: 10),
-          child: const Text(
-            "Lorem ipsum dolor sit amet, consec tetur adipisc ing elit. Donec vitae arcu. Duis non leo volutpat, faucibus arcu eget, consequat libero. Donec vitae arcu. Duis non leo volutpat, faucibus arcu eget, consequat libero.",
-            style: TextStyle(
+          child: Text(
+            card.description,
+            style: const TextStyle(
               color: AppColors.secondaryTextColor,
               fontSize: 14,
             ),
@@ -47,7 +67,13 @@ class CardPage extends StatelessWidget {
           margin: const EdgeInsets.only(top: 20),
           alignment: Alignment.center,
           child: TextButton(
-            onPressed: () => print("Ver más"),
+            onPressed: () async {
+              if (await canLaunch(card.link)) {
+                await launch(card.link);
+              } else {
+                throw "No se pudo abrir la url";
+              }
+            },
             style: TextButton.styleFrom(
               foregroundColor: AppColors.primaryTextColor,
               backgroundColor: AppColors.primaryColor,
@@ -63,15 +89,12 @@ class CardPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(right: 20, left: 20, top: 10),
       height: 450,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
         color: Colors.black54,
-        image: DecorationImage(
-          image: AssetImage("lib/assets/Waifu.jpg"),
-          fit: BoxFit.cover,
-        ),
+        image: _builderDecorationImage(card.imagePath),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,9 +171,9 @@ class CardPage extends StatelessWidget {
                     children: [
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Waifu",
-                          style: TextStyle(
+                        child: Text(
+                          card.name,
+                          style: const TextStyle(
                             color: AppColors.primaryTextColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -167,9 +190,9 @@ class CardPage extends StatelessWidget {
                       Container(
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(left: 5),
-                        child: const Text(
-                          "Anime",
-                          style: TextStyle(
+                        child: Text(
+                          session.title,
+                          style: const TextStyle(
                             color: AppColors.secondaryTextColor,
                             fontSize: 13,
                             fontWeight: FontWeight.bold,
