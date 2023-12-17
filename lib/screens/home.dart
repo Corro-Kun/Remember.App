@@ -159,8 +159,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextField(
+        decoration: const InputDecoration(
           hintText: "Buscar",
           hintStyle: TextStyle(
             color: AppColors.secondaryTextColor,
@@ -179,6 +179,18 @@ class _HomePageState extends State<HomePage> {
             color: AppColors.secondaryTextColor,
           ),
         ),
+        onChanged: (value) {
+          if (value.length > 0) {
+            setState(() {
+              cards = cards
+                  .where((element) =>
+                      element.name.toLowerCase().contains(value.toLowerCase()))
+                  .toList();
+            });
+          } else {
+            _getCards();
+          }
+        },
       ),
     );
   }
