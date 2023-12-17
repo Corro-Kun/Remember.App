@@ -3,14 +3,24 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
+import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/models/sessionModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CardPage extends StatelessWidget {
+class CardPage extends StatefulWidget {
   cardModel card;
   sessionModel session;
+
   CardPage({super.key, required this.card, required this.session});
+
+  @override
+  State<CardPage> createState() => _CardPageState();
+}
+
+class _CardPageState extends State<CardPage> {
+  bool isFavorite = false;
+  int stateFavorite = 0;
 
   DecorationImage _builderDecorationImage(String path) {
     if (path.startsWith("lib")) {
@@ -24,6 +34,25 @@ class CardPage extends StatelessWidget {
         fit: BoxFit.cover,
       );
     }
+  }
+
+  _getFavorite() {
+    if (widget.card.isFavorite == 0) {
+      isFavorite = false;
+    } else {
+      isFavorite = true;
+    }
+  }
+
+  _getStateFavorite() {
+    stateFavorite = widget.card.isFavorite;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getFavorite();
+    _getStateFavorite();
   }
 
   @override
@@ -56,7 +85,7 @@ class CardPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(left: 20, top: 10),
           child: Text(
-            card.description,
+            widget.card.description,
             style: const TextStyle(
               color: AppColors.secondaryTextColor,
               fontSize: 14,
@@ -68,8 +97,8 @@ class CardPage extends StatelessWidget {
           alignment: Alignment.center,
           child: TextButton(
             onPressed: () async {
-              if (await canLaunch(card.link)) {
-                await launch(card.link);
+              if (await canLaunch(widget.card.link)) {
+                await launch(widget.card.link);
               } else {
                 throw "No se pudo abrir la url";
               }
@@ -94,7 +123,7 @@ class CardPage extends StatelessWidget {
           Radius.circular(20),
         ),
         color: Colors.black54,
-        image: _builderDecorationImage(card.imagePath),
+        image: _builderDecorationImage(widget.card.imagePath),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +159,29 @@ class CardPage extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () => print("Share"),
+                  onTap: () {
+                    if (stateFavorite == 0) {
+                      dataCard()
+                          .updateCard(1, widget.card.idcard)
+                          .then((value) {
+                        print("estado " + 1.toString());
+                        setState(() {
+                          isFavorite = true;
+                          stateFavorite = 1;
+                        });
+                      });
+                    } else {
+                      dataCard()
+                          .updateCard(0, widget.card.idcard)
+                          .then((value) {
+                        print("estado " + 0.toString());
+                        setState(() {
+                          isFavorite = false;
+                          stateFavorite = 0;
+                        });
+                      });
+                    }
+                  },
                   child: Container(
                     margin: const EdgeInsets.only(right: 10),
                     height: 30,
@@ -140,9 +191,11 @@ class CardPage extends StatelessWidget {
                       color: AppColors.primaryColor,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: const Icon(
-                      Icons.favorite_border,
-                      color: AppColors.secondaryTextColor,
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite
+                          ? AppColors.primaryTextColor
+                          : AppColors.secondaryTextColor,
                       size: 20,
                     ),
                   ),
@@ -172,7 +225,7 @@ class CardPage extends StatelessWidget {
                       Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          card.name,
+                          widget.card.name,
                           style: const TextStyle(
                             color: AppColors.primaryTextColor,
                             fontSize: 20,
@@ -191,7 +244,7 @@ class CardPage extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         margin: const EdgeInsets.only(left: 5),
                         child: Text(
-                          session.title,
+                          widget.session.title,
                           style: const TextStyle(
                             color: AppColors.secondaryTextColor,
                             fontSize: 13,

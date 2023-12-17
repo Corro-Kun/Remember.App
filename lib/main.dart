@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:remember_app/constans.dart';
 import 'package:remember_app/screens/add.dart';
+import 'package:remember_app/screens/favorites.dart';
 import 'package:remember_app/screens/home.dart';
 import 'package:remember_app/widgets/navigationWidget.dart';
 
@@ -30,9 +31,10 @@ class MainApp extends StatelessWidget {
         backgroundColor: AppColors.secondaryColor,
         body: PageView(
           controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
           children: const <Widget>[
             HomePage(),
-            Column(),
+            Favorites(),
             add(),
           ],
         ),

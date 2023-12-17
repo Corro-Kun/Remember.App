@@ -32,7 +32,9 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       dataSession().getSessions().then((value) {
         setState(() {
-          mainCategory = value[0].idsession;
+          if (value.length > 0) {
+            mainCategory = value[0].idsession;
+          }
         });
       });
     });

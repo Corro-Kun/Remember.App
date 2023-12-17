@@ -26,6 +26,7 @@ class _formState extends State<form> {
       name: "",
       description: "",
       link: "",
+      isFavorite: 0,
       imagePath: "",
       session_idsession: 0);
 
@@ -53,6 +54,7 @@ class _formState extends State<form> {
         name: "",
         description: "",
         link: "",
+        isFavorite: 0,
         imagePath: "lib/assets/Waifu.jpg",
         session_idsession: id);
     setState(() {

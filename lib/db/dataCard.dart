@@ -10,7 +10,7 @@ class dataCard {
           "CREATE TABLE session(idsession INTEGER PRIMARY KEY, title TEXT)",
         );
         db.execute(
-          "CREATE TABLE card(idcard INTEGER PRIMARY KEY AUTO_INCREMENT, name TEXT, description TEXT, link TEXT, imagePath TEXT,session_idsession INTEGER, FOREIGN KEY(session_idsession) REFERENCES session(idsession))",
+          "CREATE TABLE card(idcard INTEGER PRIMARY KEY, name TEXT, description TEXT, link TEXT, isFavorite INTEGER ,imagePath TEXT,session_idsession INTEGER, FOREIGN KEY(session_idsession) REFERENCES session(idsession))",
         );
       },
       version: 1,
@@ -27,6 +27,7 @@ class dataCard {
         'name': card.name,
         'description': card.description,
         'link': card.link,
+        'isFavorite': card.isFavorite,
         'imagePath': card.imagePath,
         'session_idsession': card.session_idsession,
       },
@@ -49,10 +50,46 @@ class dataCard {
           name: maps[i]['name'],
           description: maps[i]['description'],
           link: maps[i]['link'],
+          isFavorite: maps[i]['isFavorite'],
           imagePath: maps[i]['imagePath'],
           session_idsession: maps[i]['session_idsession'],
         );
       },
+    );
+  }
+
+  Future<List<cardModel>> getCardsFavorite() async {
+    final Database db = await OpenDB();
+    final List<Map<String, dynamic>> maps =
+        await db.query('card', where: 'isFavorite = ?', whereArgs: [1]);
+
+    print(maps);
+
+    return List.generate(
+      maps.length,
+      (i) {
+        return cardModel(
+          idcard: maps[i]['idcard'],
+          name: maps[i]['name'],
+          description: maps[i]['description'],
+          link: maps[i]['link'],
+          isFavorite: maps[i]['isFavorite'],
+          imagePath: maps[i]['imagePath'],
+          session_idsession: maps[i]['session_idsession'],
+        );
+      },
+    );
+  }
+
+  Future<void> updateCard(int value, int id) async {
+    final Database db = await OpenDB();
+    await db.update(
+      'card',
+      {
+        'isFavorite': value,
+      },
+      where: 'idcard = ?',
+      whereArgs: [id],
     );
   }
 }

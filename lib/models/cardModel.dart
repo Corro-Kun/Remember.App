@@ -4,6 +4,7 @@ class cardModel {
   String description;
   String link;
   String imagePath;
+  int isFavorite;
   int session_idsession;
 
   cardModel({
@@ -11,6 +12,7 @@ class cardModel {
     required this.name,
     required this.description,
     required this.link,
+    required this.isFavorite,
     required this.imagePath,
     required this.session_idsession,
   });

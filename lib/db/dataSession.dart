@@ -10,7 +10,7 @@ class dataSession {
           "CREATE TABLE session(idsession INTEGER PRIMARY KEY, title TEXT)",
         );
         db.execute(
-          "CREATE TABLE card(idcard INTEGER PRIMARY KEY, name TEXT, description TEXT, link TEXT, imagePath TEXT,session_idsession INTEGER, FOREIGN KEY(session_idsession) REFERENCES session(idsession))",
+          "CREATE TABLE card(idcard INTEGER PRIMARY KEY, name TEXT, description TEXT, link TEXT, isFavorite INTEGER, imagePath TEXT,session_idsession INTEGER, FOREIGN KEY(session_idsession) REFERENCES session(idsession))",
         );
       },
       version: 1,
