@@ -77,14 +77,15 @@ class _editorState extends State<editor> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    final Refresh = Navigator.push(
+                    final refresh = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => form(
-                                id: widget.id,
-                              )),
+                        builder: (context) => form(
+                          id: widget.id,
+                        ),
+                      ),
                     );
-                    if (Refresh != null) {
+                    if (refresh != null) {
                       widget.onRefresh();
                       List<cardModel> value =
                           await dataCard().getCards(widget.id);
