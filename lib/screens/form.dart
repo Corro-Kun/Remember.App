@@ -7,6 +7,7 @@ import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
+// ignore: must_be_immutable
 class form extends StatefulWidget {
   int id = 0;
   form({super.key, required this.id});
