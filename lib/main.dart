@@ -15,6 +15,10 @@ void main() {
       systemNavigationBarColor: AppColors.primaryColor,
     ),
   );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(MainApp());
 }
 
