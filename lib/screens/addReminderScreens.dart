@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:remember_app/constans.dart';
-import 'package:remember_app/db/dataSession.dart';
-import 'package:remember_app/models/sessionModel.dart';
-import 'package:remember_app/screens/addSectionScreens.dart';
-import 'package:remember_app/widgets/section.dart';
-import 'package:remember_app/widgets/appBar.dart';
+import 'package:Reminders/constans.dart';
+import 'package:Reminders/db/dataSession.dart';
+import 'package:Reminders/models/sessionModel.dart';
+import 'package:Reminders/screens/addSectionScreens.dart';
+import 'package:Reminders/widgets/section.dart';
+import 'package:Reminders/widgets/appBar.dart';
 
 class add extends StatefulWidget {
   const add({Key? key}) : super(key: key);

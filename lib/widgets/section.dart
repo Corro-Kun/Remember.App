@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:remember_app/constans.dart';
-import 'package:remember_app/db/dataCard.dart';
-import 'package:remember_app/db/dataSession.dart';
-import 'package:remember_app/models/cardModel.dart';
-import 'package:remember_app/screens/addTabScreens.dart';
-import 'package:remember_app/widgets/card.dart';
+import 'package:Reminders/constans.dart';
+import 'package:Reminders/db/dataCard.dart';
+import 'package:Reminders/db/dataSession.dart';
+import 'package:Reminders/models/cardModel.dart';
+import 'package:Reminders/screens/addTabScreens.dart';
+import 'package:Reminders/widgets/card.dart';
 
 // ignore: must_be_immutable
 class editor extends StatefulWidget {

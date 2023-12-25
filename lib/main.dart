@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:remember_app/constans.dart';
-import 'package:remember_app/screens/addReminderScreens.dart';
-import 'package:remember_app/screens/favoritesScreens.dart';
-import 'package:remember_app/screens/homeScreens.dart';
-import 'package:remember_app/widgets/navigationWidget.dart';
+import 'package:Reminders/constans.dart';
+import 'package:Reminders/screens/addReminderScreens.dart';
+import 'package:Reminders/screens/favoritesScreens.dart';
+import 'package:Reminders/screens/homeScreens.dart';
+import 'package:Reminders/widgets/navigationWidget.dart';
 
 // https://colorhunt.co/palette/164863427d9d9bbec8ddf2fd
 

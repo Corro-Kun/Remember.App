@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:remember_app/constans.dart';
-import 'package:remember_app/db/dataSession.dart';
-import 'package:remember_app/widgets/appBar.dart';
+import 'package:Reminders/constans.dart';
+import 'package:Reminders/db/dataSession.dart';
+import 'package:Reminders/widgets/appBar.dart';
 
 class AddSection extends StatefulWidget {
   const AddSection({super.key});

@@ -1,4 +1,4 @@
-import 'package:remember_app/models/cardModel.dart';
+import 'package:Reminders/models/cardModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 class dataCard {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:remember_app/constans.dart';
-import 'package:remember_app/db/dataCard.dart';
-import 'package:remember_app/db/dataSession.dart';
-import 'package:remember_app/models/cardModel.dart';
-import 'package:remember_app/models/sessionModel.dart';
-import 'package:remember_app/screens/informationCardScreens.dart';
-import 'package:remember_app/widgets/card.dart';
-import 'package:remember_app/widgets/appBar.dart';
+import 'package:Reminders/constans.dart';
+import 'package:Reminders/db/dataCard.dart';
+import 'package:Reminders/db/dataSession.dart';
+import 'package:Reminders/models/cardModel.dart';
+import 'package:Reminders/models/sessionModel.dart';
+import 'package:Reminders/screens/informationCardScreens.dart';
+import 'package:Reminders/widgets/card.dart';
+import 'package:Reminders/widgets/appBar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -1,4 +1,4 @@
-import 'package:remember_app/models/sessionModel.dart';
+import 'package:Reminders/models/sessionModel.dart';
 import 'package:sqflite/sqflite.dart';
 
 class dataSession {
