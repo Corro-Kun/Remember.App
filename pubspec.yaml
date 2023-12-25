@@ -1,7 +1,7 @@
 name: Reminders
-description: A new Flutter project.
+description: an application to remember with images.
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
