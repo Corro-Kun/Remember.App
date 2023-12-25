@@ -3,7 +3,7 @@ import 'package:remember_app/constans.dart';
 import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/widgets/appBar.dart';
-import 'package:remember_app/widgets/file.dart';
+import 'package:remember_app/widgets/card.dart';
 
 class Favorites extends StatefulWidget {
   const Favorites({Key? key}) : super(key: key);

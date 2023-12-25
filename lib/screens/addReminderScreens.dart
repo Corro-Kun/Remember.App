@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
 import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/models/sessionModel.dart';
-import 'package:remember_app/screens/addSection.dart';
-import 'package:remember_app/widgets/editor.dart';
+import 'package:remember_app/screens/addSectionScreens.dart';
+import 'package:remember_app/widgets/section.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
 class add extends StatefulWidget {

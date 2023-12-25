@@ -4,8 +4,8 @@ import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/models/sessionModel.dart';
-import 'package:remember_app/screens/card.dart';
-import 'package:remember_app/widgets/file.dart';
+import 'package:remember_app/screens/informationCardScreens.dart';
+import 'package:remember_app/widgets/card.dart';
 import 'package:remember_app/widgets/appBar.dart';
 
 class HomePage extends StatefulWidget {

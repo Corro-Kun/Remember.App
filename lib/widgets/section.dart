@@ -3,8 +3,8 @@ import 'package:remember_app/constans.dart';
 import 'package:remember_app/db/dataCard.dart';
 import 'package:remember_app/db/dataSession.dart';
 import 'package:remember_app/models/cardModel.dart';
-import 'package:remember_app/screens/form.dart';
-import 'package:remember_app/widgets/file.dart';
+import 'package:remember_app/screens/addTabScreens.dart';
+import 'package:remember_app/widgets/card.dart';
 
 // ignore: must_be_immutable
 class editor extends StatefulWidget {
