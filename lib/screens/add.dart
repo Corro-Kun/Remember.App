@@ -67,13 +67,9 @@ class _addState extends State<add> {
             height: 50,
             width: 50,
             margin: const EdgeInsets.only(top: 20, left: 155, right: 155),
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
             alignment: Alignment.center,
-            child: GestureDetector(
-              onTap: () async {
+            child: ElevatedButton(
+              onPressed: () async {
                 final Refresh = await Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AddSection()),
@@ -86,15 +82,23 @@ class _addState extends State<add> {
                   });
                 }
               },
+              style: ElevatedButton.styleFrom(
+                primary: AppColors.primaryColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                ),
+              ),
               child: const Text(
                 "Añadir",
                 style: TextStyle(
                   color: AppColors.primaryTextColor,
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

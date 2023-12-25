@@ -97,10 +97,22 @@ class _CardPageState extends State<CardPage> {
           alignment: Alignment.center,
           child: TextButton(
             onPressed: () async {
-              if (await canLaunch(widget.card.link)) {
-                await launch(widget.card.link);
-              } else {
-                throw "No se pudo abrir la url";
+              if (!await launchUrl(Uri.parse(widget.card.link))) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Se pudo abrir el enlace ${widget.card.link}',
+                      style: const TextStyle(
+                        color: AppColors.primaryTextColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    duration: Duration(seconds: 2),
+                    backgroundColor: AppColors.primaryColor,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
               }
             },
             style: TextButton.styleFrom(

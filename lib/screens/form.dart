@@ -65,7 +65,7 @@ class _formState extends State<form> {
   DecorationImage _builderDecorationImage(String path) {
     if (path.startsWith("lib")) {
       return const DecorationImage(
-        image: AssetImage("lib/assets/Waifu.jpg"),
+        image: AssetImage("lib/assets/Add.png"),
         fit: BoxFit.cover,
       );
     } else {
@@ -117,7 +117,7 @@ class _formState extends State<form> {
                 ),
                 TextField(
                   decoration: const InputDecoration(
-                    hintText: 'Lawrence...',
+                    hintText: 'Pon un nombre a tu ficha...',
                     hintStyle: TextStyle(
                       fontSize: 18,
                       color: AppColors.secondaryTextColor,
@@ -164,15 +164,15 @@ class _formState extends State<form> {
                   height: 5,
                 ),
                 TextField(
-                  maxLines: 5,
+                  maxLines: 4,
                   decoration: const InputDecoration(
-                    hintText:
-                        'there respect citizen tears leader stems however gave now idea even natural organized...',
+                    hintText: 'Pon la descripción de tu ficha aquí...',
                     hintStyle: TextStyle(
                       fontSize: 18,
                       color: AppColors.secondaryTextColor,
                     ),
-                    contentPadding: EdgeInsets.only(left: 10, right: 10),
+                    contentPadding:
+                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
@@ -270,6 +270,7 @@ class _formState extends State<form> {
                 "Guardar",
                 style: TextStyle(
                   color: AppColors.primaryTextColor,
+                  fontSize: 15,
                 ),
               ),
             ),

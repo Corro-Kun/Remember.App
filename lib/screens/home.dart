@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
           ),
           _categories_selection(),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
           _tab_content()
         ],
@@ -97,15 +97,16 @@ class _HomePageState extends State<HomePage> {
           cards.length,
           (index) => GestureDetector(
             onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CardPage(
-                          card: cards[index],
-                          session: sessions
-                              .where((element) =>
-                                  element.idsession == mainCategory)
-                              .first,
-                        ))),
+              context,
+              MaterialPageRoute(
+                builder: (context) => CardPage(
+                  card: cards[index],
+                  session: sessions
+                      .where((element) => element.idsession == mainCategory)
+                      .first,
+                ),
+              ),
+            ),
             child: file(title: cards[index].name, path: cards[index].imagePath),
           ),
         ),
@@ -181,12 +182,15 @@ class _HomePageState extends State<HomePage> {
         ),
         onChanged: (value) {
           if (value.length > 0) {
-            setState(() {
-              cards = cards
-                  .where((element) =>
-                      element.name.toLowerCase().contains(value.toLowerCase()))
-                  .toList();
-            });
+            setState(
+              () {
+                cards = cards
+                    .where((element) => element.name
+                        .toLowerCase()
+                        .contains(value.toLowerCase()))
+                    .toList();
+              },
+            );
           } else {
             _getCards();
           }

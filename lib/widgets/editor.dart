@@ -57,8 +57,23 @@ class _editorState extends State<editor> {
               children: [
                 // añadir un gestorClic para que al darle click se abra la pantalla de añadir
                 GestureDetector(
-                  onTap: () => {
-                    dataSession().deleteSession(widget.id),
+                  onTap: () async => {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Se ha eliminado la sesión ${widget.title}',
+                          style: const TextStyle(
+                            color: AppColors.primaryTextColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        duration: Duration(seconds: 2),
+                        backgroundColor: AppColors.primaryColor,
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    ),
+                    await dataSession().deleteSession(widget.id),
                     widget.onRefresh(),
                   },
                   child: const Icon(
