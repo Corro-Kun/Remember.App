@@ -1,8 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
-import 'package:remember_app/screens/add.dart';
-import 'package:remember_app/screens/home.dart';
 
 class navigationBarBottom extends StatefulWidget {
   final PageController pageController;

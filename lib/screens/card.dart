@@ -8,6 +8,7 @@ import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/models/sessionModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// ignore: must_be_immutable
 class CardPage extends StatefulWidget {
   cardModel card;
   sessionModel session;

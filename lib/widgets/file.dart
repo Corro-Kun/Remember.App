@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:remember_app/constans.dart';
 
+// ignore: must_be_immutable
 class file extends StatefulWidget {
   String title = "Default";
   String path = "lib/assets/Waifu.jpg";

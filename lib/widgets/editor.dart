@@ -6,6 +6,7 @@ import 'package:remember_app/models/cardModel.dart';
 import 'package:remember_app/screens/form.dart';
 import 'package:remember_app/widgets/file.dart';
 
+// ignore: must_be_immutable
 class editor extends StatefulWidget {
   String title = "Default";
   int id = 0;
