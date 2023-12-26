@@ -123,14 +123,16 @@ class _HomePageState extends State<HomePage> {
         itemCount: sessions.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => setState(() {
-              mainCategory = sessions[index].idsession;
-              dataCard().getCards(mainCategory).then((value) => {
-                    setState(() {
-                      cards = value;
-                    })
-                  });
-            }),
+            onTap: () => {
+              setState(() {
+                mainCategory = sessions[index].idsession;
+                dataCard().getCards(mainCategory).then((value) => {
+                      setState(() {
+                        cards = value;
+                      })
+                    });
+              })
+            },
             child: Container(
               margin: const EdgeInsets.only(right: 20),
               child: Text(

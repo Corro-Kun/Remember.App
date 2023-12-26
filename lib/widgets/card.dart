@@ -19,11 +19,6 @@ class file extends StatefulWidget {
 }
 
 class _fileState extends State<file> {
-  DecorationImage image = const DecorationImage(
-    image: AssetImage("lib/assets/Waifu.jpg"),
-    fit: BoxFit.cover,
-  );
-
   DecorationImage _builderDecorationImage(String path) {
     if (path.startsWith("lib")) {
       return const DecorationImage(
@@ -38,16 +33,9 @@ class _fileState extends State<file> {
     }
   }
 
-  _getImage() {
-    setState(() {
-      image = _builderDecorationImage(widget.path);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _getImage();
   }
 
   @override
@@ -71,7 +59,7 @@ class _fileState extends State<file> {
             width: 175,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              image: image,
+              image: _builderDecorationImage(widget.path),
             ),
           ),
           // is the title
