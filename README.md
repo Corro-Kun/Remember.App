@@ -4,7 +4,7 @@
     <b>
         Reminders
         <br>
-        Anime Theme Audio Player
+        hand-held multimedia collection
         <br>
         <br>
         images of the application:
