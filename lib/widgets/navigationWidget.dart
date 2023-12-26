@@ -14,9 +14,10 @@ class _navigationWidgetState extends State<navigationBarBottom> {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
-      backgroundColor: AppColors.secondaryColor,
+      backgroundColor: Colors.transparent,
       color: AppColors.primaryColor,
       animationDuration: const Duration(milliseconds: 300),
+      buttonBackgroundColor: AppColors.primaryColor,
       onTap: (index) {
         widget.pageController.animateToPage(
           index,

@@ -46,23 +46,24 @@ class _addState extends State<add> {
       body: ListView(
         children: [
           Container(
-              height: screenSize.height - 270,
-              child: ListView.builder(
-                itemCount: session.length,
-                itemBuilder: (context, index) {
-                  return editor(
-                    title: session[index].title,
-                    id: session[index].idsession,
-                    onRefresh: () async {
-                      List<sessionModel> sessions =
-                          await dataSession().getSessions();
-                      setState(() {
-                        session = sessions;
-                      });
-                    },
-                  );
-                },
-              )),
+            height: screenSize.height - 270,
+            child: ListView.builder(
+              itemCount: session.length,
+              itemBuilder: (context, index) {
+                return editor(
+                  title: session[index].title,
+                  id: session[index].idsession,
+                  onRefresh: () async {
+                    List<sessionModel> sessions =
+                        await dataSession().getSessions();
+                    setState(() {
+                      session = sessions;
+                    });
+                  },
+                );
+              },
+            ),
+          ),
           Container(
             height: 50,
             width: 50,
