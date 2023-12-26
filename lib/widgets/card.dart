@@ -78,7 +78,9 @@ class _fileState extends State<file> {
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              widget.title,
+              widget.title.length > 21
+                  ? widget.title.substring(0, 19) + "..."
+                  : widget.title,
               style: const TextStyle(
                 color: AppColors.primaryTextColor,
                 fontWeight: FontWeight.bold,

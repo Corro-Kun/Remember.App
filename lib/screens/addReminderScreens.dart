@@ -66,7 +66,7 @@ class _addState extends State<add> {
           Container(
             height: 50,
             width: 50,
-            margin: const EdgeInsets.only(top: 20, left: 155, right: 155),
+            margin: const EdgeInsets.only(top: 20),
             alignment: Alignment.center,
             child: ElevatedButton(
               onPressed: () async {
