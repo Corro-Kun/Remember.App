@@ -7,6 +7,9 @@
         hand-held multimedia collection
         <br>
         <br>
+        <img src="https://skillicons.dev/icons?i=flutter,dart,sqlite" alt="stack">
+        <br>
+        <br>
         images of the application:
         <br>
         <br>
