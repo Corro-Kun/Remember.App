@@ -43,10 +43,26 @@ class _addState extends State<add> {
     return Scaffold(
       appBar: const TitleappBar(title: "Agregar Recordatorio"),
       backgroundColor: AppColors.secondaryColor,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final Refresh = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddSection()),
+          );
+          if (Refresh != null) {
+            List<sessionModel> sessions = await dataSession().getSessions();
+            setState(() {
+              session = sessions;
+            });
+          }
+        },
+        child: const Icon(Icons.add, color: AppColors.primaryTextColor),
+        backgroundColor: AppColors.primaryColor,
+      ),
       body: ListView(
         children: [
           Container(
-            height: screenSize.height - 270,
+            height: screenSize.height - 169,
             child: ListView.builder(
               itemCount: session.length,
               itemBuilder: (context, index) {
@@ -64,7 +80,7 @@ class _addState extends State<add> {
               },
             ),
           ),
-          Container(
+          /*Container(
             height: 50,
             width: 50,
             margin: const EdgeInsets.only(top: 20),
@@ -99,7 +115,7 @@ class _addState extends State<add> {
                 ),
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );

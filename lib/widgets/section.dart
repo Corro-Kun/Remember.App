@@ -43,7 +43,7 @@ class _editorState extends State<editor> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 275,
+      height: 276,
       margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
