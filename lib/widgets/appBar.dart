@@ -20,6 +20,9 @@ class TitleappBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: AppColors.secondaryColor,
       elevation: 0.0,
+      iconTheme: IconThemeData(
+        color: AppColors.primaryTextColor,
+      ),
     );
   }
 }
