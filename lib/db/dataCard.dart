@@ -40,7 +40,7 @@ class dataCard {
     final List<Map<String, dynamic>> maps =
         await db.query('card', where: 'session_idsession = ?', whereArgs: [id]);
 
-    print(maps);
+    // print(maps);
 
     return List.generate(
       maps.length,
@@ -63,7 +63,7 @@ class dataCard {
     final List<Map<String, dynamic>> maps =
         await db.query('card', where: 'isFavorite = ?', whereArgs: [1]);
 
-    print(maps);
+    // print(maps);
 
     return List.generate(
       maps.length,

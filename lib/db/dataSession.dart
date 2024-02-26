@@ -34,7 +34,7 @@ class dataSession {
     final Database db = await OpenDB();
     final List<Map<String, dynamic>> maps = await db.query('session');
 
-    print(maps);
+    // print(maps);
 
     return List.generate(
       maps.length,
@@ -50,7 +50,7 @@ class dataSession {
   Future<void> deleteSession(int idsession) async {
     final Database db = await OpenDB();
 
-    print("se elimino la session $idsession");
+    // print("se elimino la session $idsession");
 
     await db.delete(
       'card',

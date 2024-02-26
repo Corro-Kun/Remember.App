@@ -264,8 +264,9 @@ class _formState extends State<form> {
                 dataCard().insertCard(card).then((value) => print("insertado"));
                 Navigator.pop(context, true);
               },
-              style: ElevatedButton.styleFrom(
-                primary: AppColors.primaryColor,
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(AppColors.primaryColor),
               ),
               child: const Text(
                 "Guardar",
