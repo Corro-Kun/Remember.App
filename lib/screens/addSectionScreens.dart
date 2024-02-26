@@ -37,7 +37,13 @@ class _AddSectionState extends State<AddSection> {
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
               child: TextField(
                 decoration: const InputDecoration(
-                    border: OutlineInputBorder(
+                    // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                        // color: AppColors.primaryColor,
+                        // width: 2.0,
+                      // ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 2.0,

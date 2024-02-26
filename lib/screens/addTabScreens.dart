@@ -124,7 +124,13 @@ class _formState extends State<form> {
                       color: AppColors.secondaryTextColor,
                     ),
                     contentPadding: EdgeInsets.only(left: 10),
-                    border: OutlineInputBorder(
+                    // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                        // color: AppColors.primaryColor,
+                        // width: 2.0,
+                      // ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 2.0,
@@ -174,7 +180,14 @@ class _formState extends State<form> {
                     ),
                     contentPadding:
                         EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
-                    border: OutlineInputBorder(
+
+                    // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                        // color: AppColors.primaryColor,
+                        // width: 2.0,
+                      // ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 2.0,
@@ -222,7 +235,13 @@ class _formState extends State<form> {
                       color: AppColors.secondaryTextColor,
                     ),
                     contentPadding: EdgeInsets.only(left: 10),
-                    border: OutlineInputBorder(
+                    // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                        // color: AppColors.primaryColor,
+                        // width: 2.0,
+                      // ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: AppColors.primaryColor,
                         width: 2.0,
