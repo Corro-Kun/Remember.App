@@ -126,9 +126,14 @@ class _editorState extends State<editor> {
               padding: const EdgeInsets.only(top: 10),
               itemCount: cards.length,
               itemBuilder: (context, index) {
-                return file(
-                  title: cards[index].name,
-                  path: cards[index].imagePath,
+                return GestureDetector(
+                  onTap: (){
+                    print(cards[index].name);
+                  },
+                  child: file(
+                    title: cards[index].name,
+                    path: cards[index].imagePath,
+                  ),
                 );
               },
             ),
