@@ -15,10 +15,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   List<sessionModel> sessions = [];
   int mainCategory = 1;
   List<cardModel> cards = [];
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   _getSessions() {
     dataSession().getSessions().then((value) {
@@ -37,6 +39,20 @@ class _HomePageState extends State<HomePage> {
           }
         });
       });
+    });
+  }
+
+  _getAnimation(){
+    setState(() {
+      _controller = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 500), 
+      );
+      _animation = Tween<double>(
+        begin: 0.0,
+        end: 1.0,
+      ).animate(_controller);
+      _controller.forward();       
     });
   }
 
@@ -62,6 +78,7 @@ class _HomePageState extends State<HomePage> {
     _getSessions();
     _getMainCategory();
     _getCards();
+    _getAnimation();
   }
 
   @override
@@ -85,6 +102,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Container _tab_content() {
     //Size screenSize = MediaQuery.of(context).size;
 
@@ -92,24 +115,27 @@ class _HomePageState extends State<HomePage> {
       margin: const EdgeInsets.only(right: 10, left: 10),
       //height: screenSize.height - 335,
       //color: Colors.amber,
-      child: Wrap(
-        children: List.generate(
-          cards.length,
-          (index) => GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CardPage(
-                  card: cards[index],
-                  session: sessions
-                      .where((element) => element.idsession == mainCategory)
-                      .first,
+      child: FadeTransition(
+        opacity: _animation,
+        child: Wrap(
+          children: List.generate(
+            cards.length,
+              (index) => GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                   MaterialPageRoute(
+                    builder: (context) => CardPage(
+                    card: cards[index],
+                    session: sessions
+                        .where((element) => element.idsession == mainCategory)
+                        .first,
+                  ),
                 ),
               ),
-            ),
             child: file(title: cards[index].name, path: cards[index].imagePath),
           ),
         ),
+      ),
       ),
     );
   }
@@ -131,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                         cards = value;
                       })
                     });
-              })
+              }),
             },
             child: Container(
               margin: const EdgeInsets.only(right: 20),
