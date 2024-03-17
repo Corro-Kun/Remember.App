@@ -147,7 +147,7 @@ class _formState extends State<form> {
                     setState(() {
                       card.name = value;
                     });
-                    print(card.name);
+                    // print(card.name);
                   },
                 ),
               ],
@@ -204,7 +204,7 @@ class _formState extends State<form> {
                     setState(() {
                       card.description = value;
                     });
-                    print(card.description);
+                    // print(card.description);
                   },
                 ),
               ],
@@ -258,7 +258,7 @@ class _formState extends State<form> {
                     setState(() {
                       card.link = value;
                     });
-                    print(card.link);
+                    // print(card.link);
                   },
                 ),
               ],

@@ -177,7 +177,7 @@ class _CardPageState extends State<CardPage> {
                       dataCard()
                           .updateCard(1, widget.card.idcard)
                           .then((value) {
-                        print("estado " + 1.toString());
+                        // print("estado " + 1.toString());
                         setState(() {
                           isFavorite = true;
                           stateFavorite = 1;
@@ -187,7 +187,7 @@ class _CardPageState extends State<CardPage> {
                       dataCard()
                           .updateCard(0, widget.card.idcard)
                           .then((value) {
-                        print("estado " + 0.toString());
+                        // print("estado " + 0.toString());
                         setState(() {
                           isFavorite = false;
                           stateFavorite = 0;

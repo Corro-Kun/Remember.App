@@ -64,4 +64,12 @@ class dataSession {
       whereArgs: [idsession],
     );
   }
+
+  Future<sessionModel> getSessionById(int idSession) async{
+    final Database db = await OpenDB();
+  
+    final List<Map<String,dynamic>> maps = await db.query('session', where: 'idsession = ?', whereArgs: [idSession]);
+    
+    return sessionModel(title: maps[0]['title'], idsession: maps[0]['idsession']);
+  }
 }

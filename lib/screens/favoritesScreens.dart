@@ -1,3 +1,6 @@
+import 'package:Reminders/db/dataSession.dart';
+import 'package:Reminders/models/sessionModel.dart';
+import 'package:Reminders/screens/informationCardScreens.dart';
 import 'package:flutter/material.dart';
 import 'package:Reminders/constans.dart';
 import 'package:Reminders/db/dataCard.dart';
@@ -42,7 +45,18 @@ class _FavoritesState extends State<Favorites> {
               children: List.generate(
                   cards.length,
                   (index) => GestureDetector(
-                        onTap: () {},
+                        onTap: () async {
+                          sessionModel a = await dataSession().getSessionById(cards[index].session_idsession);
+                          Navigator.push(
+                            context,
+                              MaterialPageRoute(
+                                builder: (context) => CardPage(
+                                card: cards[index],
+                                session: a,
+                              ),
+                            ),
+                          );
+                        },
                         child: file(
                             title: cards[index].name,
                             path: cards[index].imagePath),
