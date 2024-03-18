@@ -21,8 +21,7 @@ class _HomePageState extends State<HomePage> {
   List<cardModel> cards = [];
 
   _getSessions() {
-    dataSession().getSessions().then((value) {
-      setState(() {
+    dataSession().getSessions().then((value) { setState(() {
         sessions = value;
       });
     });

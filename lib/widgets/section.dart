@@ -1,3 +1,4 @@
+import 'package:Reminders/screens/updateCard.dart';
 import 'package:flutter/material.dart';
 import 'package:Reminders/constans.dart';
 import 'package:Reminders/db/dataCard.dart';
@@ -127,9 +128,14 @@ class _editorState extends State<editor> {
               itemCount: cards.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: (){
-                    print(cards[index].name);
-                  },
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => updateCard(
+                        id: cards[index].idcard,
+                      ),
+                    ),
+                  ),
                   child: file(
                     title: cards[index].name,
                     path: cards[index].imagePath,
