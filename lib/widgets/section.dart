@@ -132,7 +132,7 @@ class _editorState extends State<editor> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => updateCard(
-                        id: cards[index].idcard,
+                        card: cards[index],
                       ),
                     ),
                   ),
