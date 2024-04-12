@@ -1,4 +1,4 @@
-package com.example.remember_app
+package com.corro_dev.remember_app
 
 import io.flutter.embedding.android.FlutterActivity
 
