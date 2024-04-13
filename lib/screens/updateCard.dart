@@ -126,6 +126,10 @@ class _updateCard extends State<updateCard> {
     }
   }
 
+  final TextEditingController _controller_name = TextEditingController();
+  final TextEditingController _controller_description = TextEditingController();
+  final TextEditingController _controller_link = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -144,7 +148,7 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 10),
               child: TextField(
-                controller: TextEditingController(text: card.name),
+                controller: _controller_name..text = card.name,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -194,7 +198,8 @@ class _updateCard extends State<updateCard> {
                     height: 5,
                   ),
                   TextField(
-                    controller: TextEditingController(text: card.description),
+                    controller: _controller_description
+                      ..text = card.description,
                     maxLines: 4,
                     decoration: const InputDecoration(
                       hintText: 'Pon la descripción de tu ficha aquí...',
@@ -237,7 +242,7 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 20),
               child: TextField(
-                controller: TextEditingController(text: card.link),
+                controller: _controller_link..text = card.link,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
