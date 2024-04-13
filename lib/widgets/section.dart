@@ -6,6 +6,7 @@ import 'package:Reminders/db/dataSession.dart';
 import 'package:Reminders/models/cardModel.dart';
 import 'package:Reminders/screens/addTabScreens.dart';
 import 'package:Reminders/widgets/card.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 // ignore: must_be_immutable
 class editor extends StatefulWidget {
@@ -94,6 +95,7 @@ class _editorState extends State<editor> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Permission.storage.request();
                     final refresh = await Navigator.push(
                       context,
                       MaterialPageRoute(

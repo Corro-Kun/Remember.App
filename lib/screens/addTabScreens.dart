@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,6 +7,8 @@ import 'package:Reminders/constans.dart';
 import 'package:Reminders/db/dataCard.dart';
 import 'package:Reminders/models/cardModel.dart';
 import 'package:Reminders/widgets/appBar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 // ignore: must_be_immutable
 class form extends StatefulWidget {
@@ -39,7 +42,8 @@ class _formState extends State<form> {
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      print(pickedFile.path);
+      //print(pickedFile.path);
+
       setState(() {
         card.imagePath = pickedFile.path;
       });
@@ -47,6 +51,38 @@ class _formState extends State<form> {
     } else {
       print('No image selected.');
     }
+  }
+
+  Future<void> _saveCard() async {
+    var status = await Permission.storage.status;
+    if (status.isGranted && !card.imagePath.startsWith("lib")) {
+      final Directory? appDocDir = await getExternalStorageDirectory();
+      final String path = appDocDir!.path;
+
+      final File imageFile = File(card.imagePath);
+
+      final random = Random();
+      const chars =
+          'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+      String nameFile = String.fromCharCodes(Iterable.generate(
+          30, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
+
+      final Directory imagesDir = Directory('$path/images');
+      if (!await imagesDir.exists()) {
+        await imagesDir.create(recursive: true);
+      }
+
+      final File newImage = await imageFile.copy('$path/images/$nameFile.png');
+
+      //print("newImage: $newImage");
+
+      setState(() {
+        card.imagePath = newImage.path;
+      });
+    }
+    dataCard().insertCard(card).then((value) => print("insertado"));
+    Navigator.pop(context, true);
   }
 
   _getCard(int id) async {
@@ -125,10 +161,10 @@ class _formState extends State<form> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10),
                     // border: OutlineInputBorder(
-                      // borderSide: BorderSide(
-                        // color: AppColors.primaryColor,
-                        // width: 2.0,
-                      // ),
+                    // borderSide: BorderSide(
+                    // color: AppColors.primaryColor,
+                    // width: 2.0,
+                    // ),
                     // ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -154,7 +190,7 @@ class _formState extends State<form> {
             ),
           ),
           Container(
-            height: 120,
+            height: 134,
             width: double.infinity,
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Column(
@@ -182,10 +218,10 @@ class _formState extends State<form> {
                         EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
 
                     // border: OutlineInputBorder(
-                      // borderSide: BorderSide(
-                        // color: AppColors.primaryColor,
-                        // width: 2.0,
-                      // ),
+                    // borderSide: BorderSide(
+                    // color: AppColors.primaryColor,
+                    // width: 2.0,
+                    // ),
                     // ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -236,10 +272,10 @@ class _formState extends State<form> {
                     ),
                     contentPadding: EdgeInsets.only(left: 10),
                     // border: OutlineInputBorder(
-                      // borderSide: BorderSide(
-                        // color: AppColors.primaryColor,
-                        // width: 2.0,
-                      // ),
+                    // borderSide: BorderSide(
+                    // color: AppColors.primaryColor,
+                    // width: 2.0,
+                    // ),
                     // ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -280,8 +316,7 @@ class _formState extends State<form> {
             padding: const EdgeInsets.only(top: 5),
             child: ElevatedButton(
               onPressed: () {
-                dataCard().insertCard(card).then((value) => print("insertado"));
-                Navigator.pop(context, true);
+                _saveCard();
               },
               style: ButtonStyle(
                 backgroundColor:
