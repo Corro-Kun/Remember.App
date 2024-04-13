@@ -92,4 +92,28 @@ class dataCard {
       whereArgs: [id],
     );
   }
+
+  Future<void> updateCardData(cardModel card) async {
+    final Database db = await OpenDB();
+    await db.update(
+      'card',
+      {
+        'name': card.name,
+        'description': card.description,
+        'link': card.link,
+        'imagePath': card.imagePath,
+      },
+      where: 'idcard = ?',
+      whereArgs: [card.idcard],
+    );
+  }
+
+  Future<void> deleteCard(int id) async {
+    final Database db = await OpenDB();
+    await db.delete(
+      'card',
+      where: 'idcard = ?',
+      whereArgs: [id],
+    );
+  }
 }

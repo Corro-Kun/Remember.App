@@ -1,10 +1,14 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:Reminders/constans.dart';
+import 'package:Reminders/db/dataCard.dart';
 import 'package:Reminders/models/cardModel.dart';
 import 'package:Reminders/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class updateCard extends StatefulWidget {
   cardModel card;
@@ -16,8 +20,30 @@ class updateCard extends StatefulWidget {
 
 class _updateCard extends State<updateCard> {
   final ImagePicker _picker = ImagePicker();
+  String pathDefault = '';
+  cardModel card = new cardModel(
+      idcard: 0,
+      name: "",
+      description: "",
+      link: "",
+      isFavorite: 1,
+      imagePath: "",
+      session_idsession: 1);
+
+  _getCard() {
+    setState(() {
+      card = widget.card;
+    });
+  }
+
+  _getPath() {
+    setState(() {
+      pathDefault = widget.card.imagePath;
+    });
+  }
 
   Future<void> _pickImage() async {
+    //print(pathDefault);
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       //print(pickedFile.path);
@@ -56,10 +82,56 @@ class _updateCard extends State<updateCard> {
     });
   }
 
+  Future<void> _updateCardOnDb() async {
+    var status = await Permission.storage.status;
+    if (status.isGranted && !widget.card.imagePath.startsWith("lib")) {
+      final Directory? appDocDir = await getExternalStorageDirectory();
+      final String path = appDocDir!.path;
+
+      final File imageFile = File(widget.card.imagePath);
+
+      final random = Random();
+      const chars =
+          'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+      String nameFile = String.fromCharCodes(Iterable.generate(
+          30, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
+
+      final Directory imagesDir = Directory('$path/images');
+      if (!await imagesDir.exists()) {
+        await imagesDir.create(recursive: true);
+      }
+
+      final File newImage = await imageFile.copy('$path/images/$nameFile.png');
+
+      //print("newImage: $newImage");
+
+      final File imagenOld = File(pathDefault);
+
+      await imagenOld.delete();
+
+      setState(() {
+        card.imagePath = newImage.path;
+      });
+    }
+    dataCard().updateCardData(card).then((value) => {
+          Navigator.pop(context, true),
+        });
+  }
+
+  _delteImage() {
+    if (!pathDefault.startsWith("lib")) {
+      final File imagenOld = File(pathDefault);
+      imagenOld.delete();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    _getDecorationImagen(widget.card.imagePath);
+    _getPath();
+    _getCard();
+    _getDecorationImagen(card.imagePath);
   }
 
   @override
@@ -72,7 +144,7 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 10),
               child: TextField(
-                controller: TextEditingController(text: widget.card.name),
+                controller: TextEditingController(text: card.name),
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -96,6 +168,12 @@ class _updateCard extends State<updateCard> {
                     fontSize: 17,
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    card.name = value;
+                  });
+                  // print(card.name);
+                },
               ),
             ),
             Container(
@@ -116,8 +194,7 @@ class _updateCard extends State<updateCard> {
                     height: 5,
                   ),
                   TextField(
-                    controller:
-                        TextEditingController(text: widget.card.description),
+                    controller: TextEditingController(text: card.description),
                     maxLines: 4,
                     decoration: const InputDecoration(
                       hintText: 'Pon la descripción de tu ficha aquí...',
@@ -148,7 +225,9 @@ class _updateCard extends State<updateCard> {
                       ),
                     ),
                     onChanged: (value) {
-                      setState(() {});
+                      setState(() {
+                        card.description = value;
+                      });
                       // print(card.description);
                     },
                   ),
@@ -158,7 +237,7 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 20),
               child: TextField(
-                controller: TextEditingController(text: widget.card.link),
+                controller: TextEditingController(text: card.link),
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -166,7 +245,7 @@ class _updateCard extends State<updateCard> {
                       width: 2.0,
                     ),
                   ),
-                  labelText: 'Link de la ficha',
+                  labelText: 'Nombre de la ficha',
                   labelStyle: TextStyle(
                     color: AppColors.secondaryTextColor,
                     fontSize: 17,
@@ -182,6 +261,12 @@ class _updateCard extends State<updateCard> {
                     fontSize: 17,
                   ),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    card.link = value;
+                  });
+                  // print(card.name);
+                },
               ),
             ),
             Container(
@@ -206,7 +291,12 @@ class _updateCard extends State<updateCard> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      //print(pathDefault);
                       //Navigator.pop(context);
+                      _delteImage();
+                      dataCard().deleteCard(card.idcard).then((value) => {
+                            Navigator.pop(context, true),
+                          });
                     },
                     child: const Text('Eliminar ficha'),
                     style: ElevatedButton.styleFrom(
@@ -219,7 +309,7 @@ class _updateCard extends State<updateCard> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(widget.card.imagePath);
+                      _updateCardOnDb();
                       //Navigator.pop(context);
                     },
                     child: const Text('Actualizar'),

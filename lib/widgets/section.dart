@@ -130,14 +130,25 @@ class _editorState extends State<editor> {
               itemCount: cards.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => updateCard(
-                        card: cards[index],
+                  onTap: () async {
+                    Permission.storage.request();
+                    final refresh = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => updateCard(
+                          card: cards[index],
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                    if (refresh != null) {
+                      widget.onRefresh();
+                      List<cardModel> value =
+                          await dataCard().getCards(widget.id);
+                      setState(() {
+                        cards = value;
+                      });
+                    }
+                  },
                   child: file(
                     title: cards[index].name,
                     path: cards[index].imagePath,

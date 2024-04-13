@@ -81,7 +81,7 @@ class _formState extends State<form> {
         card.imagePath = newImage.path;
       });
     }
-    dataCard().insertCard(card).then((value) => print("insertado"));
+    dataCard().insertCard(card).then((value) => /*print("insertado")*/ null);
     Navigator.pop(context, true);
   }
 
