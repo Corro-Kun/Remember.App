@@ -166,7 +166,7 @@ class _updateCard extends State<updateCard> {
                       width: 2.0,
                     ),
                   ),
-                  labelText: 'Nombre de la ficha',
+                  labelText: 'Link de la ficha',
                   labelStyle: TextStyle(
                     color: AppColors.secondaryTextColor,
                     fontSize: 17,
