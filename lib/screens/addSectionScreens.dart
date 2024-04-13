@@ -36,12 +36,17 @@ class _AddSectionState extends State<AddSection> {
             Container(
               margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
               child: TextField(
+                cursorColor: AppColors.primaryColor,
+                style: const TextStyle(
+                  color: AppColors.primaryTextColor,
+                  fontSize: 17,
+                ),
                 decoration: const InputDecoration(
                     // border: OutlineInputBorder(
-                      // borderSide: BorderSide(
-                        // color: AppColors.primaryColor,
-                        // width: 2.0,
-                      // ),
+                    // borderSide: BorderSide(
+                    // color: AppColors.primaryColor,
+                    // width: 2.0,
+                    // ),
                     // ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(

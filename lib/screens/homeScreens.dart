@@ -21,7 +21,8 @@ class _HomePageState extends State<HomePage> {
   List<cardModel> cards = [];
 
   _getSessions() {
-    dataSession().getSessions().then((value) { setState(() {
+    dataSession().getSessions().then((value) {
+      setState(() {
         sessions = value;
       });
     });
@@ -162,6 +163,11 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       child: TextField(
+        cursorColor: AppColors.primaryColor,
+        style: const TextStyle(
+          color: AppColors.primaryTextColor,
+          fontSize: 17,
+        ),
         decoration: const InputDecoration(
           hintText: "Buscar",
           hintStyle: TextStyle(

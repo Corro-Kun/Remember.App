@@ -153,6 +153,11 @@ class _formState extends State<form> {
                   height: 5,
                 ),
                 TextField(
+                  cursorColor: AppColors.primaryColor,
+                  style: const TextStyle(
+                    color: AppColors.primaryTextColor,
+                    fontSize: 17,
+                  ),
                   decoration: const InputDecoration(
                     hintText: 'Pon un nombre a tu ficha...',
                     hintStyle: TextStyle(
@@ -208,6 +213,11 @@ class _formState extends State<form> {
                 ),
                 TextField(
                   maxLines: 4,
+                  cursorColor: AppColors.primaryColor,
+                  style: const TextStyle(
+                    color: AppColors.primaryTextColor,
+                    fontSize: 16,
+                  ),
                   decoration: const InputDecoration(
                     hintText: 'Pon la descripción de tu ficha aquí...',
                     hintStyle: TextStyle(
@@ -264,6 +274,11 @@ class _formState extends State<form> {
                   height: 5,
                 ),
                 TextField(
+                  cursorColor: AppColors.primaryColor,
+                  style: const TextStyle(
+                    color: AppColors.primaryTextColor,
+                    fontSize: 17,
+                  ),
                   decoration: const InputDecoration(
                     hintText: 'http://jetak.ai/iggew...',
                     hintStyle: TextStyle(

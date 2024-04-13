@@ -148,6 +148,11 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 10),
               child: TextField(
+                cursorColor: AppColors.primaryColor,
+                style: const TextStyle(
+                  color: AppColors.primaryTextColor,
+                  fontSize: 17,
+                ),
                 controller: _controller_name..text = card.name,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -191,13 +196,18 @@ class _updateCard extends State<updateCard> {
                     "Descripción",
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppColors.primaryTextColor,
+                      color: AppColors.secondaryTextColor,
                     ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   TextField(
+                    cursorColor: AppColors.primaryColor,
+                    style: const TextStyle(
+                      color: AppColors.primaryTextColor,
+                      fontSize: 16,
+                    ),
                     controller: _controller_description
                       ..text = card.description,
                     maxLines: 4,
@@ -242,6 +252,11 @@ class _updateCard extends State<updateCard> {
             Container(
               margin: EdgeInsets.only(left: 20, right: 20, top: 20),
               child: TextField(
+                cursorColor: AppColors.primaryColor,
+                style: const TextStyle(
+                  color: AppColors.primaryTextColor,
+                  fontSize: 17,
+                ),
                 controller: _controller_link..text = card.link,
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(
