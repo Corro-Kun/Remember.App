@@ -94,9 +94,7 @@ class _AddSectionState extends State<AddSection> {
                         behavior: SnackBarBehavior.floating,
                       ),
                     );
-                    dataSession()
-                        .insertSession(title)
-                        .then((value) => print("Se ha añadido la sección"));
+                    dataSession().insertSession(title).then((value) => {});
                     Navigator.pop(context, true);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

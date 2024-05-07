@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Reminders/models/sessionModel.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -52,6 +54,17 @@ class dataSession {
 
     // print("se elimino la session $idsession");
 
+    final List<Map<String, dynamic>> maps = await db
+        .query('card', where: 'session_idsession = ?', whereArgs: [idsession]);
+
+    for (var i = 0; i < maps.length; i++) {
+      if (maps[i]['imagePath'] != null &&
+          !maps[i]['imagePath'].toString().startsWith("lib")) {
+        File file = File(maps[i]['imagePath']);
+        file.delete();
+      }
+    }
+
     await db.delete(
       'card',
       where: 'session_idsession = ?',
@@ -65,11 +78,13 @@ class dataSession {
     );
   }
 
-  Future<sessionModel> getSessionById(int idSession) async{
+  Future<sessionModel> getSessionById(int idSession) async {
     final Database db = await OpenDB();
-  
-    final List<Map<String,dynamic>> maps = await db.query('session', where: 'idsession = ?', whereArgs: [idSession]);
-    
-    return sessionModel(title: maps[0]['title'], idsession: maps[0]['idsession']);
+
+    final List<Map<String, dynamic>> maps = await db
+        .query('session', where: 'idsession = ?', whereArgs: [idSession]);
+
+    return sessionModel(
+        title: maps[0]['title'], idsession: maps[0]['idsession']);
   }
 }
