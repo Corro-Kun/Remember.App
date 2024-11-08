@@ -31,7 +31,7 @@ class MainApp extends StatelessWidget {
         backgroundColor: AppColors.secondaryColor,
         body: PageView(
           controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: const <Widget>[
             HomePage(),
             Favorites(),
