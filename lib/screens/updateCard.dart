@@ -141,210 +141,213 @@ class _updateCard extends State<updateCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.secondaryColor,
-        appBar: const TitleappBar(title: 'Actualizar ficha'),
-        body: ListView(
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-              child: TextField(
-                cursorColor: AppColors.primaryColor,
-                style: const TextStyle(
-                  color: AppColors.primaryTextColor,
+      backgroundColor: AppColors.secondaryColor,
+      appBar: const TitleappBar(title: 'Actualizar ficha'),
+      body: ListView(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: TextField(
+              cursorColor: AppColors.primaryColor,
+              style: const TextStyle(
+                color: AppColors.primaryTextColor,
+                fontSize: 17,
+              ),
+              controller: _controller_name..text = card.name,
+              decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.primaryColor,
+                    width: 2.0,
+                  ),
+                ),
+                labelText: 'Nombre de la ficha',
+                labelStyle: TextStyle(
+                  color: AppColors.secondaryTextColor,
                   fontSize: 17,
                 ),
-                controller: _controller_name..text = card.name,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                      width: 2.0,
-                    ),
-                  ),
-                  labelText: 'Nombre de la ficha',
-                  labelStyle: TextStyle(
-                    color: AppColors.secondaryTextColor,
-                    fontSize: 17,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                      width: 2.0,
-                    ),
-                  ),
-                  floatingLabelStyle: TextStyle(
-                    color: AppColors.secondaryTextColor,
-                    fontSize: 17,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.primaryColor,
+                    width: 2.0,
                   ),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    card.name = value;
-                  });
-                  // print(card.name);
-                },
+                floatingLabelStyle: TextStyle(
+                  color: AppColors.secondaryTextColor,
+                  fontSize: 17,
+                ),
               ),
+              onChanged: (value) {
+                setState(() {
+                  card.name = value;
+                });
+                // print(card.name);
+              },
             ),
-            Container(
-              height: 134,
-              width: double.infinity,
-              margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Descripción",
-                    style: TextStyle(
-                      fontSize: 16,
+          ),
+          Container(
+            height: 134,
+            width: double.infinity,
+            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Descripción",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.secondaryTextColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                TextField(
+                  cursorColor: AppColors.primaryColor,
+                  style: const TextStyle(
+                    color: AppColors.primaryTextColor,
+                    fontSize: 16,
+                  ),
+                  controller: _controller_description..text = card.description,
+                  maxLines: 4,
+                  decoration: const InputDecoration(
+                    hintText: 'Pon la descripción de tu ficha aquí...',
+                    hintStyle: TextStyle(
+                      fontSize: 18,
                       color: AppColors.secondaryTextColor,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  TextField(
-                    cursorColor: AppColors.primaryColor,
-                    style: const TextStyle(
-                      color: AppColors.primaryTextColor,
-                      fontSize: 16,
-                    ),
-                    controller: _controller_description
-                      ..text = card.description,
-                    maxLines: 4,
-                    decoration: const InputDecoration(
-                      hintText: 'Pon la descripción de tu ficha aquí...',
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: AppColors.secondaryTextColor,
-                      ),
-                      contentPadding: EdgeInsets.only(
-                          left: 10, right: 10, top: 5, bottom: 5),
+                    contentPadding:
+                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
 
-                      // border: OutlineInputBorder(
-                      // borderSide: BorderSide(
-                      // color: AppColors.primaryColor,
-                      // width: 2.0,
-                      // ),
-                      // ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 2.0,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primaryColor,
-                          width: 2.0,
-                        ),
+                    // border: OutlineInputBorder(
+                    // borderSide: BorderSide(
+                    // color: AppColors.primaryColor,
+                    // width: 2.0,
+                    // ),
+                    // ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 2.0,
                       ),
                     ),
-                    onChanged: (value) {
-                      setState(() {
-                        card.description = value;
-                      });
-                      // print(card.description);
-                    },
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 2.0,
+                      ),
+                    ),
                   ),
-                ],
-              ),
+                  onChanged: (value) {
+                    setState(() {
+                      card.description = value;
+                    });
+                    // print(card.description);
+                  },
+                ),
+              ],
             ),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: TextField(
-                cursorColor: AppColors.primaryColor,
-                style: const TextStyle(
-                  color: AppColors.primaryTextColor,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20, top: 20),
+            child: TextField(
+              cursorColor: AppColors.primaryColor,
+              style: const TextStyle(
+                color: AppColors.primaryTextColor,
+                fontSize: 17,
+              ),
+              controller: _controller_link..text = card.link,
+              decoration: const InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.primaryColor,
+                    width: 2.0,
+                  ),
+                ),
+                labelText: 'Nombre de la ficha',
+                labelStyle: TextStyle(
+                  color: AppColors.secondaryTextColor,
                   fontSize: 17,
                 ),
-                controller: _controller_link..text = card.link,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                      width: 2.0,
-                    ),
-                  ),
-                  labelText: 'Nombre de la ficha',
-                  labelStyle: TextStyle(
-                    color: AppColors.secondaryTextColor,
-                    fontSize: 17,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.primaryColor,
-                      width: 2.0,
-                    ),
-                  ),
-                  floatingLabelStyle: TextStyle(
-                    color: AppColors.secondaryTextColor,
-                    fontSize: 17,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: AppColors.primaryColor,
+                    width: 2.0,
                   ),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    card.link = value;
-                  });
-                  // print(card.name);
-                },
+                floatingLabelStyle: TextStyle(
+                  color: AppColors.secondaryTextColor,
+                  fontSize: 17,
+                ),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  card.link = value;
+                });
+                // print(card.name);
+              },
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            child: GestureDetector(
+              onTap: () => _pickImage(),
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                height: 220,
+                width: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.primaryColor,
+                    image: image),
               ),
             ),
-            Container(
-              alignment: Alignment.center,
-              child: GestureDetector(
-                onTap: () => _pickImage(),
-                child: Container(
-                  margin: const EdgeInsets.all(20),
-                  height: 220,
-                  width: 200,
-                  decoration: BoxDecoration(
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    //print(pathDefault);
+                    //Navigator.pop(context);
+                    _delteImage();
+                    dataCard().deleteCard(card.idcard).then((value) => {
+                          Navigator.pop(context, true),
+                        });
+                  },
+                  child: const Text('Eliminar ficha'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryColor,
+                    foregroundColor: AppColors.primaryTextColor,
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColors.primaryColor,
-                      image: image),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      //print(pathDefault);
-                      //Navigator.pop(context);
-                      _delteImage();
-                      dataCard().deleteCard(card.idcard).then((value) => {
-                            Navigator.pop(context, true),
-                          });
-                    },
-                    child: const Text('Eliminar ficha'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      foregroundColor: AppColors.primaryTextColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                ElevatedButton(
+                  onPressed: () {
+                    _updateCardOnDb();
+                    //Navigator.pop(context);
+                  },
+                  child: const Text('Actualizar'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primaryColor,
+                    foregroundColor: AppColors.primaryTextColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _updateCardOnDb();
-                      //Navigator.pop(context);
-                    },
-                    child: const Text('Actualizar'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      foregroundColor: AppColors.primaryTextColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ));
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
   }
 }
