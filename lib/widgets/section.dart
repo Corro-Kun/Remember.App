@@ -58,27 +58,55 @@ class _editorState extends State<editor> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // añadir un gestorClic para que al darle click se abra la pantalla de añadir
                 GestureDetector(
-                  onTap: () async => {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Se ha eliminado la sesión ${widget.title}',
-                          style: const TextStyle(
-                            color: AppColors.primaryTextColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  onTap: () => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      icon: const Icon(
+                        Icons.delete,
+                        size: 30,
+                        color: AppColors.primaryColor,
+                      ),
+                      title: const Text('¿Desea eliminar esta sesión?'),
+                      content: const Text(
+                          'Se eliminarán todas las fichas que hayas creado en esta sesión e imágenes.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: const Text(
+                            'Cancelar',
+                            style: TextStyle(color: AppColors.primaryColor),
                           ),
                         ),
-                        duration: Duration(seconds: 2),
-                        backgroundColor: AppColors.primaryColor,
-                        behavior: SnackBarBehavior.floating,
-                      ),
+                        TextButton(
+                          onPressed: () async => {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Se ha eliminado la sesión ${widget.title}',
+                                  style: const TextStyle(
+                                    color: AppColors.primaryTextColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: AppColors.primaryColor,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            ),
+                            await dataSession().deleteSession(widget.id),
+                            widget.onRefresh(),
+                            Navigator.pop(context, 'OK')
+                          },
+                          child: const Text(
+                            'Aceptar',
+                            style: TextStyle(color: AppColors.primaryColor),
+                          ),
+                        ),
+                      ],
                     ),
-                    await dataSession().deleteSession(widget.id),
-                    widget.onRefresh(),
-                  },
+                  ),
                   child: const Icon(
                     Icons.delete,
                     color: AppColors.primaryTextColor,

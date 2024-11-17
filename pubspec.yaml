@@ -1,7 +1,7 @@
 name: Reminders
 description: an application to remember with images.
 publish_to: 'none'
-version: 1.1.0
+version: 1.1.2
 
 environment:
   sdk: ^3.5.3
@@ -10,13 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
-  curved_navigation_bar: ^1.0.3
-  google_nav_bar: ^5.0.6
-  sqflite: ^2.3.0
-  image_picker: ^1.0.4
+  cupertino_icons: ^1.0.8
+  curved_navigation_bar: ^1.0.6
+  google_nav_bar: ^5.0.7
+  sqflite: ^2.4.1
+  image_picker: ^1.1.2
   path_provider: ^2.1.1
-  url_launcher: ^6.0.9
+  url_launcher: ^6.3.1
   permission_handler: ^11.3.1
 
 dev_dependencies:
