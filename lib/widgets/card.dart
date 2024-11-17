@@ -40,10 +40,21 @@ class _fileState extends State<file> {
 
   @override
   Widget build(BuildContext context) {
+    widthCart() {
+      final Size screenSize = MediaQuery.of(context).size;
+      final size = (screenSize.width.toDouble() - 60) / 2;
+
+      if (size > 180) {
+        return 175.0;
+      }
+
+      return size;
+    }
+
     return Container(
       margin: const EdgeInsets.only(right: 10, left: 10, bottom: 20),
       height: 220,
-      width: 175,
+      width: widthCart(),
       decoration: const BoxDecoration(
         color: AppColors.primaryColor,
         borderRadius: BorderRadius.all(
@@ -66,14 +77,14 @@ class _fileState extends State<file> {
           Container(
             margin: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
-              widget.title.length > 19
-                  ? widget.title.substring(0, 16) + "..."
-                  : widget.title,
+              widget.title,
               style: const TextStyle(
                 color: AppColors.primaryTextColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],

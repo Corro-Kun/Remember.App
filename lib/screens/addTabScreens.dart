@@ -133,220 +133,225 @@ class _formState extends State<form> {
     return Scaffold(
       backgroundColor: AppColors.secondaryColor,
       appBar: const TitleappBar(title: 'Agregar ficha'),
-      body: Column(
-        children: [
-          Container(
-            height: 80,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Nombre",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.primaryTextColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  cursorColor: AppColors.primaryColor,
-                  style: const TextStyle(
-                    color: AppColors.primaryTextColor,
-                    fontSize: 17,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Pon un nombre a tu ficha...',
-                    hintStyle: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.secondaryTextColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 80,
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Nombre",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryTextColor,
                     ),
-                    contentPadding: EdgeInsets.only(left: 10),
-                    // border: OutlineInputBorder(
-                    // borderSide: BorderSide(
-                    // color: AppColors.primaryColor,
-                    // width: 2.0,
-                    // ),
-                    // ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextField(
+                    cursorColor: AppColors.primaryColor,
+                    style: const TextStyle(
+                      color: AppColors.primaryTextColor,
+                      fontSize: 17,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'Pon un nombre a tu ficha...',
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: AppColors.secondaryTextColor,
+                      ),
+                      contentPadding: EdgeInsets.only(left: 10),
+                      // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                      // color: AppColors.primaryColor,
+                      // width: 2.0,
+                      // ),
+                      // ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
-                      ),
-                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        card.name = value;
+                      });
+                      // print(card.name);
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      card.name = value;
-                    });
-                    // print(card.name);
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 134,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Descripción",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.primaryTextColor,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  maxLines: 4,
-                  cursorColor: AppColors.primaryColor,
-                  style: const TextStyle(
-                    color: AppColors.primaryTextColor,
-                    fontSize: 16,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'Pon la descripción de tu ficha aquí...',
-                    hintStyle: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.secondaryTextColor,
+            Container(
+              height: 134,
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Descripción",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryTextColor,
                     ),
-                    contentPadding:
-                        EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextField(
+                    maxLines: 4,
+                    cursorColor: AppColors.primaryColor,
+                    style: const TextStyle(
+                      color: AppColors.primaryTextColor,
+                      fontSize: 16,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'Pon la descripción de tu ficha aquí...',
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: AppColors.secondaryTextColor,
+                      ),
+                      contentPadding: EdgeInsets.only(
+                          left: 10, right: 10, top: 5, bottom: 5),
 
-                    // border: OutlineInputBorder(
-                    // borderSide: BorderSide(
-                    // color: AppColors.primaryColor,
-                    // width: 2.0,
-                    // ),
-                    // ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
+                      // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                      // color: AppColors.primaryColor,
+                      // width: 2.0,
+                      // ),
+                      // ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
-                      ),
+                    onChanged: (value) {
+                      setState(() {
+                        card.description = value;
+                      });
+                      // print(card.description);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 80,
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "link",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryTextColor,
                     ),
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      card.description = value;
-                    });
-                    // print(card.description);
-                  },
-                ),
-              ],
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextField(
+                    cursorColor: AppColors.primaryColor,
+                    style: const TextStyle(
+                      color: AppColors.primaryTextColor,
+                      fontSize: 17,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: 'http://jetak.ai/iggew...',
+                      hintStyle: TextStyle(
+                        fontSize: 18,
+                        color: AppColors.secondaryTextColor,
+                      ),
+                      contentPadding: EdgeInsets.only(left: 10),
+                      // border: OutlineInputBorder(
+                      // borderSide: BorderSide(
+                      // color: AppColors.primaryColor,
+                      // width: 2.0,
+                      // ),
+                      // ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.primaryColor,
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        card.link = value;
+                      });
+                      // print(card.link);
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: 80,
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "link",
+            GestureDetector(
+              onTap: () => _pickImage(),
+              child: Container(
+                margin: const EdgeInsets.all(20),
+                height: 220,
+                width: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.primaryColor,
+                    image: image),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  _saveCard();
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(AppColors.primaryColor),
+                ),
+                child: const Text(
+                  "Guardar",
                   style: TextStyle(
-                    fontSize: 16,
                     color: AppColors.primaryTextColor,
+                    fontSize: 15,
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextField(
-                  cursorColor: AppColors.primaryColor,
-                  style: const TextStyle(
-                    color: AppColors.primaryTextColor,
-                    fontSize: 17,
-                  ),
-                  decoration: const InputDecoration(
-                    hintText: 'http://jetak.ai/iggew...',
-                    hintStyle: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.secondaryTextColor,
-                    ),
-                    contentPadding: EdgeInsets.only(left: 10),
-                    // border: OutlineInputBorder(
-                    // borderSide: BorderSide(
-                    // color: AppColors.primaryColor,
-                    // width: 2.0,
-                    // ),
-                    // ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 2.0,
-                      ),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      card.link = value;
-                    });
-                    // print(card.link);
-                  },
-                ),
-              ],
-            ),
-          ),
-          GestureDetector(
-            onTap: () => _pickImage(),
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              height: 220,
-              width: 200,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: AppColors.primaryColor,
-                  image: image),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: ElevatedButton(
-              onPressed: () {
-                _saveCard();
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(AppColors.primaryColor),
-              ),
-              child: const Text(
-                "Guardar",
-                style: TextStyle(
-                  color: AppColors.primaryTextColor,
-                  fontSize: 15,
                 ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -122,7 +122,10 @@ class _CardPageState extends State<CardPage> {
             ),
             child: const Text("Ver más", style: TextStyle(fontSize: 15)),
           ),
-        )
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }
@@ -251,6 +254,8 @@ class _CardPageState extends State<CardPage> {
                               ),
                             ],
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                       ),
                       Container(

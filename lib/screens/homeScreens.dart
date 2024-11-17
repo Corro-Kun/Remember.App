@@ -75,17 +75,17 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 30,
           ),
-          _categories_selection(),
+          _categoriesSelection(),
           const SizedBox(
             height: 20,
           ),
-          _tab_content()
+          _tabContent()
         ],
       ),
     );
   }
 
-  Container _tab_content() {
+  Container _tabContent() {
     //Size screenSize = MediaQuery.of(context).size;
 
     return Container(
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container _categories_selection() {
+  Container _categoriesSelection() {
     return Container(
       margin: const EdgeInsets.only(left: 20),
       height: 30,
